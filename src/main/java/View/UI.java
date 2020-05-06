@@ -19,15 +19,32 @@ public class UI {
     }
 
     public String getStrInput(){
-        return input.nextLine();
+        String str = input.nextLine();
+        if(str.isEmpty()){
+            printToConsole("Dit input er tomt!");
+            getStrInput();
+        }
+        return str;
     }
 
     public int getIntInput(){
-        return Integer.parseInt(input.nextLine());
+        String str = input.nextLine();
+
+        if(str.isEmpty()){
+            printToConsole("Dit input er tomt! Prøv igen: ");
+            str = input.nextLine();
+        }
+        int select = Integer.parseInt(str.trim());
+        return select;
     }
 
     public double getDoubleInput(){
-        return Double.parseDouble(input.nextLine());
+        String str = input.nextLine();
+        if(str.isEmpty()){
+            printToConsole("Dit input er tomt!");
+            getDoubleInput();
+        }
+        return Double.parseDouble(str);
     }
 
 }

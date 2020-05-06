@@ -17,7 +17,7 @@ public class UserHandler {
         while(!isloggedin){
         User tmpUser;
         Connection connection = DBConnector.getInstance().getConnection();
-
+        ui.printToConsole("Velkommen til Delfinen svømmeklub!\n");
         ui.printToConsole("Indtast brugernavn: ");
         String username = ui.getStrInput();
         ui.printToConsole("Indtast kodeord: ");

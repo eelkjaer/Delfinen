@@ -2,6 +2,10 @@ package Controller;
 import Model.*;
 
 public class AdminController extends MainController {
+    BaseController base;
+    public AdminController(BaseController base){
+        this.base = base;
+    }
     @Override
     public void showMenu() {
         ui.printToConsole("Velkommen admin!\n");
@@ -10,15 +14,33 @@ public class AdminController extends MainController {
         switch (select){
             case 1:
                 //tilmeld
-                break;
+                showMenu();
             case 2:
                 //rediger
-                break;
+                showMenu();
             case 3:
                 //slet
+                showMenu();
+            case 4:
+                //Se restance
+                showMenu();
+            case 5:
+                //Se kontigenter
+                showMenu();
+            case 6:
+                //Ændre kontingenter
+                showMenu();
+            case 7:
+                // Se top 5 junior
+                showMenu();
+            case 8:
+                // Se top 5 senior
+                showMenu();
+            case 9:
+                base.logout();
                 break;
-                //todo: tilføj resten
             default:
+                ui.printToConsole(select + " findes ikke!\n");
                 showMenu();
         }
     }
