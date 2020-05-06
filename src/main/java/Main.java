@@ -1,11 +1,13 @@
 import Controller.*;
+import Data.UserHandler;
 import Model.User;
 
 public class Main {
 
     public static void main(String[] args) {
         MainController ctrl;
-        User user = new User("admin","admin",3);
+        UserHandler userHandler = new UserHandler();
+        User user = userHandler.checkLogin();
 
         switch (user.getUserPermissions()){
             case 1:

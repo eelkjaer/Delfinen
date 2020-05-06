@@ -9,7 +9,13 @@ public class UI {
     }
 
     public void printMenu(String menuStr){
-        System.out.print(menuStr);
+        String[] menu = menuStr.split(";");
+        System.out.println("#####################");
+        for(int i=0; menu.length > i; i++){
+            System.out.println(i+1 + ")\t"+menu[i]);
+        }
+        System.out.println("#####################");
+        System.out.print("Vælg menu: ");
     }
 
     public String getStrInput(){

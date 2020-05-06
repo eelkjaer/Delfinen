@@ -1,5 +1,6 @@
 package Controller;
 import Model.*;
+import View.UI;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ abstract public class MainController {
     public ArrayList<Result> results;
     public ArrayList<Payment> payments;
     public ArrayList<Competition> competitions;
+
+    UI ui = new UI();
 
     //Fælles metoder
 

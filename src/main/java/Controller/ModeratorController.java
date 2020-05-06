@@ -1,21 +1,12 @@
 package Controller;
 import Model.*;
+import View.UI;
 
 public class ModeratorController extends MainController {
     @Override
-    protected void showMenu() {
-        int select = 0;
-        switch (select){
-            case 1:
-                System.out.println("valg 1");
-                break;
-            case 2:
-                System.out.println("valg 2");
-                break;
-            default:
-                System.out.println("intet valgt");
-                showMenu();
-        }
+    public void showMenu() {
+        ui.printToConsole("Velkommen kassere!\n");
+        ui.printMenu("Se restancer;Se kontigenter;Ændre kontigenter;Log ud");
         //TODO: Menu layout
     }
 

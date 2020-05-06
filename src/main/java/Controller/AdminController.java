@@ -3,8 +3,24 @@ import Model.*;
 
 public class AdminController extends MainController {
     @Override
-    protected void showMenu() {
-        //TODO: Menu layout
+    public void showMenu() {
+        ui.printToConsole("Velkommen admin!\n");
+        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Ændre kontigenter;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        int select = ui.getIntInput();
+        switch (select){
+            case 1:
+                //tilmeld
+                break;
+            case 2:
+                //rediger
+                break;
+            case 3:
+                //slet
+                break;
+                //todo: tilføj resten
+            default:
+                showMenu();
+        }
     }
 
     /*
