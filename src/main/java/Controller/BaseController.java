@@ -23,7 +23,6 @@ public class BaseController {
                 ctrl = new AdminController(this);
                 break;
             default:
-                ctrl = new UserController(this);
                 break;
         }
         ctrl.showMenu();
