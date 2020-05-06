@@ -8,7 +8,7 @@ abstract public class MainController {
     /*
      * Viser menuen vha. UI til brugeren
      */
-    protected abstract void showMenu();
+    public abstract void showMenu();
 
     //Variabler til controlleren
     public ArrayList<Member> members;

@@ -4,6 +4,18 @@ import Model.*;
 public class ModeratorController extends MainController {
     @Override
     protected void showMenu() {
+        int select = 0;
+        switch (select){
+            case 1:
+                System.out.println("valg 1");
+                break;
+            case 2:
+                System.out.println("valg 2");
+                break;
+            default:
+                System.out.println("intet valgt");
+                showMenu();
+        }
         //TODO: Menu layout
     }
 
