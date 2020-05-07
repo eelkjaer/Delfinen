@@ -17,15 +17,15 @@ public class UserHandler {
         while(!isloggedin){
         User tmpUser;
         Connection connection = DBConnector.getInstance().getConnection();
-        ui.printToConsole("Velkommen til Delfinen svømmeklub!\n");
-        ui.printToConsole("Indtast brugernavn: ");
+        ui.printMessage("Velkommen til Delfinen svømmeklub!\n");
+        ui.printMessage("Indtast brugernavn: ");
         String username = ui.getStrInput();
-        ui.printToConsole("Indtast kodeord: ");
+        ui.printMessage("Indtast kodeord: ");
         String password = ui.getStrInput();
 
 
         try {
-            String query = "SELECT * FROM users WHERE username=? AND password=?";
+            String query = "SELECT * FROM Users WHERE Username=? AND Password=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1,username);
@@ -39,12 +39,12 @@ public class UserHandler {
             } else {
                 counter--;
                 if(counter <= 0){
-                    ui.printToConsole("Farvel...");
+                    ui.printMessage("Farvel...");
                     System.exit(0);
                 } else if(counter <= 3){
-                    ui.printToConsole("Forkert login! Du har " + counter + " forsøg tilbage!\nPrøv igen!\n");
+                    ui.printMessage("Forkert login! Du har " + counter + " forsøg tilbage!\nPrøv igen!\n");
                 } else {
-                    ui.printToConsole("Forkert login! Prøv igen!\n");
+                    ui.printMessage("Forkert login! Prøv igen!\n");
                 }
             }
 

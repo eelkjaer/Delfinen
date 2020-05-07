@@ -9,7 +9,7 @@ public class UserController extends MainController {
     }
     @Override
     public void showMenu() {
-        ui.printToConsole("Velkommen træner!\n");
+        ui.printMessage("Velkommen træner!\n");
         ui.printMenu("Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
@@ -23,7 +23,7 @@ public class UserController extends MainController {
                 base.logout();
                 break;
             default:
-                ui.printToConsole(select + " findes ikke!\n");
+                ui.printMessage(select + " findes ikke!\n");
                 showMenu();
         }
     }

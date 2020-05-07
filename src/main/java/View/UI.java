@@ -1,13 +1,13 @@
 package View;
 import java.util.Scanner;
 
-public class UI {
+public class UI implements UIInterface{
     Scanner input = new Scanner(System.in);
 
     /**
      * @param str Streng som skal printes i konsol. Laver IKKE selv linebreak (\n)
      */
-    public void printToConsole(String str){
+    public void printMessage(String str){
         System.out.print(str);
     }
 
@@ -28,7 +28,7 @@ public class UI {
     public String getStrInput(){
         String str = input.nextLine();
         if(str.isEmpty()){
-            printToConsole("Dit input er tomt!");
+            printMessage("Dit input er tomt!");
             getStrInput();
         }
         return str;
@@ -38,7 +38,7 @@ public class UI {
         String str = input.nextLine();
 
         if(str.isEmpty()){
-            printToConsole("Dit input er tomt! Prøv igen: ");
+            printMessage("Dit input er tomt! Prøv igen: ");
             str = input.nextLine();
         }
         int select = Integer.parseInt(str.trim());
@@ -48,7 +48,7 @@ public class UI {
     public double getDoubleInput(){
         String str = input.nextLine();
         if(str.isEmpty()){
-            printToConsole("Dit input er tomt!");
+            printMessage("Dit input er tomt!");
             getDoubleInput();
         }
         return Double.parseDouble(str);

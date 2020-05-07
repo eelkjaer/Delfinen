@@ -46,4 +46,14 @@ public class Payment {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                ", member=" + member +
+                ", paid=" + paid +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

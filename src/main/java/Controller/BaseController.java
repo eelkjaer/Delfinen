@@ -31,7 +31,7 @@ public class BaseController {
     public void logout(){
         ctrl = null;
         userHandler = null;
-        ui.printToConsole("Du er nu logget ud!\n\n");
+        ui.printMessage("Du er nu logget ud!\n\n");
         login();
     }
 }

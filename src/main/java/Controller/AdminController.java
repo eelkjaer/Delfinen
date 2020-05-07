@@ -10,7 +10,7 @@ public class AdminController extends MainController {
     }
     @Override
     public void showMenu() {
-        ui.printToConsole("Velkommen admin!\n");
+        ui.printMessage("Velkommen admin!\n");
         ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Ændre kontigenter;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
@@ -42,7 +42,7 @@ public class AdminController extends MainController {
                 base.logout();
                 break;
             default:
-                ui.printToConsole(select + " findes ikke!\n");
+                ui.printMessage(select + " findes ikke!\n");
                 showMenu();
         }
     }

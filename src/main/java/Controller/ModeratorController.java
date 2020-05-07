@@ -9,7 +9,8 @@ public class ModeratorController extends MainController {
     }
     @Override
     public void showMenu() {
-        ui.printToConsole("Velkommen kassere!\n");
+        super.refreshData();
+        ui.printMessage("Velkommen kassere!\n");
         ui.printMenu("Se restancer;Se kontigenter;Ændre kontigenter;Log ud");
         int select = ui.getIntInput();
         switch (select){
@@ -27,7 +28,7 @@ public class ModeratorController extends MainController {
                 base.logout();
                 break;
             default:
-                ui.printToConsole(select + " findes ikke!\n");
+                ui.printMessage(select + " findes ikke!\n");
                 showMenu();
         }
     }
@@ -38,11 +39,27 @@ public class ModeratorController extends MainController {
     public void showMissingPayments(){
         //TODO: Kode
 
+        /* FOR DEVELOPMENT PURPOSES */
+        for(Membership ms:super.memberships){
+            System.out.println(ms);
+        }
+
+        for(Member m:super.members)
+        {
+            System.out.println(m);
+        }
+
+        for(Payment p: super.payments){
+            System.out.println(p);
+        }
+        /* END TEST */
+
         String query = "SELECT Members.Name AS \"Swimmer\", Memberships.Name AS \"Membership\", (Payments.Paid - Memberships.Price) AS \"Restance\"\n" +
                 "FROM Members\n" +
                 "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
                 "INNER JOIN Payments ON Payments.MemberID = Members.ID\n" +
                 "WHERE (Payments.Paid - Memberships.Price) < 0 OR (Payments.Paid - Memberships.Price) > 0";
+
     }
 
     /*

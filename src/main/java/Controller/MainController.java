@@ -1,6 +1,7 @@
 package Controller;
+import Data.*;
 import Model.*;
-import View.UI;
+import View.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,6 +16,7 @@ abstract public class MainController {
 
     //Variabler til controlleren
     public ArrayList<Member> members;
+    public ArrayList<Membership> memberships;
     public ArrayList<Result> results;
     public ArrayList<Payment> payments;
     public ArrayList<Competition> competitions;
@@ -30,12 +32,10 @@ abstract public class MainController {
 
     }
 
-    public int calculateAge(LocalDate birthDate) {
-        if (birthDate != null) {
-            return Period.between(birthDate, LocalDate.now()).getYears();
-        } else {
-            return 0;
-        }
+    public void refreshData(){
+        memberships = new MembershipMapper().getMemberships();
+        members = new MemberMapper().getAllMembers(memberships);
+        payments = new PaymentMapper().getAllPayments(members);
     }
 
     public void logout(){
