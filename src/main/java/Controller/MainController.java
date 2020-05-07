@@ -37,8 +37,8 @@ abstract public class MainController {
         memberships = new MembershipMapper().getMemberships();
         members = new MemberMapper().getAllMembers(memberships);
         payments = new PaymentMapper().getAllPayments(members);
-        results = new ResultMapper().getResults(members,competitions);
         competitions = new CompetitionMapper().getCompetitions();
+        results = new ResultMapper().getResults(members,competitions);
         teams = new TeamMapper().getTeams(members, users);
     }
 
