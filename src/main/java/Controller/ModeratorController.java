@@ -40,17 +40,32 @@ public class ModeratorController extends MainController {
         //TODO: Kode
 
         /* FOR DEVELOPMENT PURPOSES */
-        for(Membership ms:super.memberships){
-            System.out.println(ms);
+        for(Competition c: competitions){
+            System.out.println(c);
         }
 
-        for(Member m:super.members)
-        {
+        for(Member m: members){
             System.out.println(m);
         }
 
-        for(Payment p: super.payments){
+        for(Membership ms: memberships){
+            System.out.println(ms);
+        }
+
+        for(Payment p: payments){
             System.out.println(p);
+        }
+
+        for(Result r: results){
+            System.out.println(r);
+        }
+
+        for(Team t: teams){
+            System.out.println(t);
+        }
+
+        for(User u: users){
+            System.out.println(u);
         }
         /* END TEST */
 

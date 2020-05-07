@@ -31,22 +31,6 @@ public class Payment {
         this.member = member;
     }
 
-    public double getPaid() {
-        return paid;
-    }
-
-    public void setPaid(double paid) {
-        this.paid = paid;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
     @Override
     public String toString() {
         return "Payment{" +

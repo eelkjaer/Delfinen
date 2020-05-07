@@ -23,23 +23,17 @@ public class Competition {
         return name;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

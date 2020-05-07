@@ -34,7 +34,7 @@ public class UserHandler {
 
             if(result.next()){
                 //korrekt login
-                tmpUser = new User(username,password,result.getInt("permissions"));
+                tmpUser = new User(result.getInt("ID"),username,password,result.getString("Name"),result.getInt("permissions"));
                 return tmpUser;
             } else {
                 counter--;

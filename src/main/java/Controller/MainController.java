@@ -3,8 +3,6 @@ import Data.*;
 import Model.*;
 import View.*;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
 abstract public class MainController {
@@ -15,11 +13,13 @@ abstract public class MainController {
     public abstract void showMenu();
 
     //Variabler til controlleren
+    public ArrayList<User> users;
     public ArrayList<Member> members;
     public ArrayList<Membership> memberships;
     public ArrayList<Result> results;
     public ArrayList<Payment> payments;
     public ArrayList<Competition> competitions;
+    public ArrayList<Team> teams;
 
     UI ui = new UI();
 
@@ -33,9 +33,13 @@ abstract public class MainController {
     }
 
     public void refreshData(){
+        users = new UserMapper().getUsers();
         memberships = new MembershipMapper().getMemberships();
         members = new MemberMapper().getAllMembers(memberships);
         payments = new PaymentMapper().getAllPayments(members);
+        results = new ResultMapper().getResults(members,competitions);
+        competitions = new CompetitionMapper().getCompetitions();
+        teams = new TeamMapper().getTeams(members, users);
     }
 
     public void logout(){

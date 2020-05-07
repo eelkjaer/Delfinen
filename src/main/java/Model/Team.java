@@ -20,4 +20,14 @@ public class Team {
         this.name = name;
         this.coach = coach;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coach=" + coach +
+                ", teamMembers=" + teamMembers +
+                '}';
+    }
 }

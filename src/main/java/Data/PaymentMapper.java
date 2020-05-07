@@ -1,7 +1,6 @@
 package Data;
 
-import Model.Member;
-import Model.Payment;
+import Model.*;
 import Util.DBConnector;
 
 import java.sql.*;

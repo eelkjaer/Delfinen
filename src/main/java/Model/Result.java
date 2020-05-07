@@ -29,39 +29,20 @@ public class Result {
         return member;
     }
 
-    public String getDiciplin() {
-        return diciplin;
-    }
-
-    public Competition getCompetition() {
-        return competition;
-    }
-
-    public double getResultMeters() {
-        return resultMeters;
-    }
-
-    public boolean isTraining() {
-        return training;
-    }
-
     public void setMember(Member member) {
         this.member = member;
     }
 
-    public void setDiciplin(String diciplin) {
-        this.diciplin = diciplin;
-    }
-
-    public void setCompetition(Competition competition) {
-        this.competition = competition;
-    }
-
-    public void setResultMeters(double resultMeters) {
-        this.resultMeters = resultMeters;
-    }
-
-    public void setTraining(boolean training) {
-        this.training = training;
+    @Override
+    public String toString() {
+        return "Result{" +
+                "id=" + id +
+                ", member=" + member +
+                ", diciplin='" + diciplin + '\'' +
+                ", competition=" + competition +
+                ", resultMeters=" + resultMeters +
+                ", resultTime=" + resultTime +
+                ", training=" + training +
+                '}';
     }
 }
