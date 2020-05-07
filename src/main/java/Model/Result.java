@@ -1,7 +1,5 @@
 package Model;
 
-import java.sql.Time;
-
 public class Result {
     private int id;
     private Member member;

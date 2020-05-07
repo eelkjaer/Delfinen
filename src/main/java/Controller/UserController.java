@@ -1,6 +1,4 @@
 package Controller;
-import Model.*;
-import View.UI;
 
 public class UserController extends MainController {
     BaseController base;
