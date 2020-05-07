@@ -25,7 +25,7 @@ public class ResultMapper {
                 String diciplin = resultset.getString("Disciplin");
                 int competitionID = resultset.getInt("CompetitionID");
                 double resultMeters = resultset.getDouble("ResultMeters");
-                Time resultTime = resultset.getTime("ResultTime");
+                int resultTime = resultset.getInt("ResultTime");
                 boolean training = resultset.getBoolean("Training");
 
                 Member member = null;
@@ -52,7 +52,7 @@ public class ResultMapper {
         return tmpResults;
     }
 
-    public Result addNewResult(Member member, String diciplin, Competition competition, Double resultMeters, Time resultTime, boolean training){
+    public Result addNewResult(Member member, String diciplin, Competition competition, Double resultMeters, int resultTime, boolean training){
         int memberId = member.getId();
         int competitionId = competition.getId();
 
@@ -65,7 +65,7 @@ public class ResultMapper {
             statement.setString(2,diciplin);
             statement.setInt(3,competitionId);
             statement.setDouble(4,resultMeters);
-            statement.setTime(5,resultTime);
+            statement.setInt(5,resultTime);
             statement.setBoolean(6,training);
             statement.executeUpdate();
             ResultSet tableKeys = statement.getGeneratedKeys();

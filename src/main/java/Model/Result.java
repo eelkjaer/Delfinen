@@ -8,10 +8,10 @@ public class Result {
     private String diciplin;
     private Competition competition;
     private double resultMeters;
-    private Time resultTime;
+    private int resultTime;
     private boolean training;
 
-    public Result(int id, Member member, String diciplin, Competition competition, double resultMeters, Time resultTime , boolean training) {
+    public Result(int id, Member member, String diciplin, Competition competition, double resultMeters, int resultTime , boolean training) {
         this.id = id;
         this.member = member;
         this.diciplin = diciplin;
