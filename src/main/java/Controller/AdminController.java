@@ -1,6 +1,8 @@
 package Controller;
 import Model.*;
 
+import java.time.*;
+
 public class AdminController extends MainController {
     BaseController base;
     public AdminController(BaseController base){
@@ -50,6 +52,7 @@ public class AdminController extends MainController {
      */
     private void registerNewMember(){
         //TODO: Kode
+
     }
 
     /*

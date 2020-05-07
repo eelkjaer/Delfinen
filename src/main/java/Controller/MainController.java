@@ -2,6 +2,8 @@ package Controller;
 import Model.*;
 import View.UI;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 abstract public class MainController {
@@ -28,6 +30,13 @@ abstract public class MainController {
 
     }
 
+    public int calculateAge(LocalDate birthDate) {
+        if (birthDate != null) {
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        } else {
+            return 0;
+        }
+    }
 
     public void logout(){
         System.out.println("Du er logget ud!");

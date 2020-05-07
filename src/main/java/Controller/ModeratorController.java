@@ -15,6 +15,7 @@ public class ModeratorController extends MainController {
         switch (select){
             case 1:
                 //Se restance
+                showMissingPayments();
                 showMenu();
             case 2:
                 //Se kontigenter
