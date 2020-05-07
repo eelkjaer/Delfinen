@@ -4,10 +4,17 @@ import java.util.Scanner;
 public class UI {
     Scanner input = new Scanner(System.in);
 
+    /**
+     * @param str Streng som skal printes i konsol. Laver IKKE selv linebreak (\n)
+     */
     public void printToConsole(String str){
         System.out.print(str);
     }
 
+
+    /**
+     * @param menuStr Semikolon sepereret liste med menupunkter
+     */
     public void printMenu(String menuStr){
         String[] menu = menuStr.split(";");
         System.out.println("#####################");

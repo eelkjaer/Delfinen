@@ -36,6 +36,12 @@ public class ModeratorController extends MainController {
      */
     public void showMissingPayments(){
         //TODO: Kode
+
+        String query = "SELECT Members.Name AS \"Swimmer\", Memberships.Name AS \"Membership\", (Payments.Paid - Memberships.Price) AS \"Restance\"\n" +
+                "FROM Members\n" +
+                "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
+                "INNER JOIN Payments ON Payments.MemberID = Members.ID\n" +
+                "WHERE (Payments.Paid - Memberships.Price) < 0 OR (Payments.Paid - Memberships.Price) > 0";
     }
 
     /*
