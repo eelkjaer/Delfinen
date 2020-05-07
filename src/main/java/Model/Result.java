@@ -1,19 +1,23 @@
 package Model;
 
+import java.sql.Time;
+
 public class Result {
     private int id;
     private Member member;
     private String diciplin;
     private Competition competition;
-    private double result;
+    private double resultMeters;
+    private Time resultTime;
     private boolean training;
 
-    public Result(int id, Member member, String diciplin, Competition competition, double result, boolean training) {
+    public Result(int id, Member member, String diciplin, Competition competition, double resultMeters, Time resultTime , boolean training) {
         this.id = id;
         this.member = member;
         this.diciplin = diciplin;
         this.competition = competition;
-        this.result = result;
+        this.resultMeters = resultMeters;
+        this.resultTime = resultTime;
         this.training = training;
     }
 
@@ -33,8 +37,8 @@ public class Result {
         return competition;
     }
 
-    public double getResult() {
-        return result;
+    public double getResultMeters() {
+        return resultMeters;
     }
 
     public boolean isTraining() {
@@ -53,8 +57,8 @@ public class Result {
         this.competition = competition;
     }
 
-    public void setResult(double result) {
-        this.result = result;
+    public void setResultMeters(double resultMeters) {
+        this.resultMeters = resultMeters;
     }
 
     public void setTraining(boolean training) {
