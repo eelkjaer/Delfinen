@@ -24,36 +24,21 @@ abstract public class MainController {
 
 
     //Klasser til brug i controlleren
-    MemberHandler memberHandler = new MemberHandler();
+    protected MemberHandler memberHandler = new MemberHandler();
 
     protected UI ui = new UI();
     protected UserMapper userMapper = new UserMapper();
     protected MembershipMapper membershipMapper = new MembershipMapper();
     protected MemberMapper memberMapper = new MemberMapper();
     protected PaymentMapper paymentMapper = new PaymentMapper();
+    protected PaymentHandler paymentHandler = new PaymentHandler();
     protected CompetitionMapper competitionMapper = new CompetitionMapper();
     protected ResultMapper resultMapper = new ResultMapper();
     protected TeamMapper teamMapper = new TeamMapper();
 
     //Fælles metoder
 
-
-    /**
-     * @param filter Viser top 5 under følgende filtre: "junior" eller "senior"
-     */
-    public void showTop(String filter){
-        ui.printMessage("Show top 5 " + filter);
-        ui.printMessage(memberHandler.showTopSwimmers(filter));
-        showMenu();
-    }
-
-
-    /**
-     * Viser en lister over restancer
-     */
-    public void showMissingPayments(){
-        //TODO: Kode
-
+    public void objectTesting(){
         /* FOR DEVELOPMENT PURPOSES */
         for(Competition c: competitions){
             System.out.println(c);
@@ -83,13 +68,24 @@ abstract public class MainController {
             System.out.println(u);
         }
         /* END TEST */
+    }
 
-        String query = "SELECT Members.Name AS \"Swimmer\", Memberships.Name AS \"Membership\", (Payments.Paid - Memberships.Price) AS \"Restance\"\n" +
-                "FROM Members\n" +
-                "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
-                "INNER JOIN Payments ON Payments.MemberID = Members.ID\n" +
-                "WHERE (Payments.Paid - Memberships.Price) < 0 OR (Payments.Paid - Memberships.Price) > 0";
 
+    /**
+     * @param filter Viser top 5 under følgende filtre: "junior" eller "senior"
+     */
+    public void showTop(String filter){
+        ui.printMessage("Show top 5 " + filter);
+        ui.printMessage(memberHandler.showTopSwimmers(filter));
+        showMenu();
+    }
+
+
+    /**
+     * Viser en lister over restancer
+     */
+    public void showMissingPayments(){
+        ui.printMessage(paymentHandler.showMissingPayments());
         showMenu();
     }
 
