@@ -46,6 +46,22 @@ public class Member {
         }
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
     @Override
     public String toString() {
         return "Member{" +

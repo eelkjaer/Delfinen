@@ -28,8 +28,83 @@ abstract public class MainController {
     /**
      * Viser top 5 svømmere indenfor hver kategori
      */
-    public void showTop(){
+    public void showTop(String filter){
+    switch (filter){
+        case "junior":
+            //TODO: Code
+            System.out.println(filter + " valgt");
+            showMenu();
+        case "senior":
+            //TODO: Code
+            System.out.println(filter + " valgt");
+            showMenu();
+        default:
+            System.out.println("Default valgt");
+            showMenu();
+        }
+    }
 
+    /*
+     * Viser en liste over medlemmer med restance
+     */
+    public void showMissingPayments(){
+        //TODO: Kode
+
+        /* FOR DEVELOPMENT PURPOSES */
+        for(Competition c: competitions){
+            System.out.println(c);
+        }
+
+        for(Member m: members){
+            System.out.println(m);
+        }
+
+        for(Membership ms: memberships){
+            System.out.println(ms);
+        }
+
+        for(Payment p: payments){
+            System.out.println(p);
+        }
+
+        for(Result r: results){
+            System.out.println(r);
+        }
+
+        for(Team t: teams){
+            System.out.println(t);
+        }
+
+        for(User u: users){
+            System.out.println(u);
+        }
+        /* END TEST */
+
+        String query = "SELECT Members.Name AS \"Swimmer\", Memberships.Name AS \"Membership\", (Payments.Paid - Memberships.Price) AS \"Restance\"\n" +
+                "FROM Members\n" +
+                "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
+                "INNER JOIN Payments ON Payments.MemberID = Members.ID\n" +
+                "WHERE (Payments.Paid - Memberships.Price) < 0 OR (Payments.Paid - Memberships.Price) > 0";
+
+        showMenu();
+    }
+
+    /*
+     * Viser de nuværende kontigentsatser
+     */
+    public void showContingents(){
+        //TODO: Kode
+
+        showMenu();
+    }
+
+    /*
+     * Ændre kontingentsatserne
+     */
+    public void changeContingents(){
+        //TODO: Kode
+
+        showMenu();
     }
 
     public void refreshData(){
