@@ -3,6 +3,10 @@ package Controller;
 import Model.Member;
 import Model.Membership;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 public class AdminController extends MainController {
     BaseController base;
     public AdminController(BaseController base){
@@ -51,8 +55,42 @@ public class AdminController extends MainController {
      * Opretter nyt medlem
      **/
     private void registerNewMember(){
-        //TODO: Kode
+        ui.printMessage("Opret nyt medlem\n");
 
+        ui.printMessage("\nIndtast medlemmets fulde navn: ");
+        String name = ui.getStrInput();
+
+        ui.printMessage("\nIndtast medlemmets fødselsdag (Format: dag-måned-år, ex. 30-12-2020): ");
+        String birthday = ui.getStrInput();
+
+        ui.printMessage("\nIndtast medlemmets e-mail: ");
+        String email = ui.getStrInput();
+
+        ui.printMessage("\nIndtast medlemmets telefonnummer: ");
+        int phone = ui.getIntInput();
+
+        int age = Period.between(LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd-MM-yyyy")), LocalDate.now()).getYears();
+
+        ui.printMessage("\nMulige kontigenter: ");
+        for(Membership ms: memberships){
+            if(age <= 18 && !ms.getName().equals("Senior")){
+                ui.printMessage("\n"+ms.getId() + ") " + ms.getName() + " - pris pr. år: " + ms.getPrice());
+            } else if (age >= 18 && !ms.getName().equals("Junior")){
+                ui.printMessage("\n"+ms.getId() + ") " + ms.getName() + " - pris pr. år: " + ms.getPrice());
+            }
+        }
+        ui.printMessage("\nVælg hvilket kontigent brugeren ønsker: ");
+        int membership = ui.getIntInput();
+
+        int memberNumber = memberHandler.registerMember(name, birthday, email, phone, membership);
+
+        ui.printMessage(String.format("%nNew member created!" +
+                "%nMember number: %s%n" +
+                "Member name: %s%n" +
+                "Member email: %s%n" +
+                "Member phone: %d%n", memberNumber, name,email,phone));
+
+        showMenu();
     }
 
     /**
@@ -68,7 +106,8 @@ public class AdminController extends MainController {
                     selectedMember = m;
                 }
             }
-            ui.printMessage(selectedMember.toString());
+        assert selectedMember != null;
+        ui.printMessage(selectedMember.toString());
             ui.printMenu("Ændre E-mail;Ændre telefonnummer;Ændre medlemskab");
             int select = ui.getIntInput();
             switch (select){
@@ -105,7 +144,32 @@ public class AdminController extends MainController {
      * Ændre attributter på eksisterende medlem
      **/
     private void deleteMember(){
-        //TODO: Kode
+        ui.printMessage("Indtast medlemsnummer: ");
+        int memNo = ui.getIntInput();
+        Member selectedMember = null;
+
+        for (Member m : members) {
+            if (m.getId() == memNo) {
+                selectedMember = m;
+            }
+        }
+        ui.printMessage("Er du sikker på at du vil slette følgende: \n");
+        assert selectedMember != null;
+        ui.printMessage(String.format("%nMember number: %s%nMember name: %s%n", selectedMember.getId(),selectedMember.getName()));
+        System.out.println("Skriv Y/y for JA eller N/n for NEJ: ");
+        String confirmInput = ui.getStrInput();
+        if(confirmInput.toLowerCase().equals("y")){
+            if(memberHandler.deleteMember(selectedMember.getId())){
+                ui.printMessage("Medlemmet blev slettet!\n");
+                showMenu();
+            } else {
+                ui.printMessage("Der opstod en fejl!\n");
+                deleteMember();
+            }
+        } else {
+            ui.printMessage("Handlingen blev stoppet!\n");
+            showMenu();
+        }
     }
 
 

@@ -35,20 +35,29 @@ public class UI implements UIInterface{
     }
 
     public int getIntInput(){
-        String str = input.nextLine();
-
+        String str;
+        while(!input.hasNextInt()){
+            printMessage("Det er ikke et tal!\n");
+            input.next();
+        }
+        str = input.nextLine();
         if(str.isEmpty()){
-            printMessage("Dit input er tomt! Prøv igen: ");
+            printMessage("\nDit input er tomt! Prøv igen: \n");
             str = input.nextLine();
         }
+
         int select = Integer.parseInt(str.trim());
         return select;
     }
 
     public double getDoubleInput(){
-        String str = input.nextLine();
+        String str;
+        while(!input.hasNextDouble()){
+            System.out.println("Det er ikke et decimal tal!");
+        }
+        str = input.nextLine();
         if(str.isEmpty()){
-            printMessage("Dit input er tomt!");
+            printMessage("\nDit input er tomt!\n");
             getDoubleInput();
         }
         return Double.parseDouble(str);

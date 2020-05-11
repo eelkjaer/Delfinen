@@ -4,6 +4,8 @@ import Model.Member;
 import Model.Membership;
 import Model.Result;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,6 +36,14 @@ public class MemberHandler {
         this.members = members;
     }
 
+    public boolean addMember(Member member){
+        if(!this.members.contains(member) || member != null){
+            this.members.add(member);
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<Result> getResults() {
         return results;
     }
@@ -42,14 +52,50 @@ public class MemberHandler {
         this.results = results;
     }
 
+    /**
+     * @param id Medlemsnummer
+     * @return true if deleted from list and DB
+     */
+    public boolean deleteMember(int id){
+        return memberMapper.deleteMember(id) && members.removeIf(m -> m.getId() == id);
+    }
+
+    /**
+     * @param name Members full name
+     * @param birthday Format: dd-mm-yyyy (ex. 30-12-2020)
+     * @param email Members email
+     * @param phone Members phone number
+     * @param membership Desired memberships ID
+     * @return membership number
+     */
+    public int registerMember(String name, String birthday, String email, int phone, int membership){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate bday = LocalDate.parse(birthday,formatter);
+
+        Membership selectedMembership = null;
+        for(Membership ms: memberships){
+            if(ms.getId() == membership){
+                selectedMembership = ms;
+            }
+        }
+        if(selectedMembership == null){
+            assert selectedMembership != null;
+            selectedMembership.setId(3);
+        }
+
+        Member tmpMember = memberMapper.createNewMember(name, bday,email,phone,selectedMembership);
+        addMember(tmpMember);
+        return tmpMember.getId();
+    }
+
     public String showTopSwimmers(String filter){
         HashMap<Result,Member> tmpMap = getTopSwimmers(filter);
-        String printStr = "";
+        StringBuilder printStr = new StringBuilder();
 
         for(Result r: tmpMap.keySet()){
-            printStr += r.toString();
+            printStr.append(r.toString());
         }
-        return printStr;
+        return printStr.toString();
     }
 
     private HashMap<Result,Member> getTopSwimmers(String filter){
