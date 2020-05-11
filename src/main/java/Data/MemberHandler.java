@@ -5,15 +5,14 @@ import Model.Membership;
 import Model.Result;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class MemberHandler {
-    private MemberMapper memberMapper = new MemberMapper();
-    private ArrayList<Membership> memberships = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<Result> results = new ArrayList<>();
+    private final MemberMapper memberMapper = new MemberMapper();
+    private ArrayList<Membership> memberships;
+    private ArrayList<Member> members;
+    private ArrayList<Result> results;
 
     public MemberHandler(){
 
