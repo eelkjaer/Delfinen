@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Member;
+import Model.Membership;
+
 public class AdminController extends MainController {
     BaseController base;
     public AdminController(BaseController base){
@@ -7,34 +10,34 @@ public class AdminController extends MainController {
     }
     @Override
     public void showMenu() {
-        ui.printMessage("Velkommen admin!\n");
+        refreshData();
         ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Ændre kontigenter;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
                 //tilmeld
-                showMenu();
+                registerNewMember();
             case 2:
                 //rediger
-                showMenu();
+                changeMember();
             case 3:
                 //slet
-                showMenu();
+                deleteMember();
             case 4:
                 //Se restance
-                showMenu();
+                showMissingPayments();
             case 5:
                 //Se kontigenter
-                showMenu();
+                showContingents();
             case 6:
                 //Ændre kontingenter
-                showMenu();
+                changeContingents();
             case 7:
                 // Se top 5 junior
-                showMenu();
+                showTop("junior");
             case 8:
                 // Se top 5 senior
-                showMenu();
+                showTop("senior");
             case 9:
                 base.logout();
                 break;
@@ -44,24 +47,63 @@ public class AdminController extends MainController {
         }
     }
 
-    /*
+    /**
      * Opretter nyt medlem
-     */
+     **/
     private void registerNewMember(){
         //TODO: Kode
 
     }
 
-    /*
+    /**
      * Ændre attributter på eksisterende medlem
-     */
+     **/
     private void changeMember(){
+            ui.printMessage("Indtast medlemsnummer: ");
+            int memNo = ui.getIntInput();
+            Member selectedMember = null;
+
+            for (Member m : members) {
+                if (m.getId() == memNo) {
+                    selectedMember = m;
+                }
+            }
+            ui.printMessage(selectedMember.toString());
+            ui.printMenu("Ændre E-mail;Ændre telefonnummer;Ændre medlemskab");
+            int select = ui.getIntInput();
+            switch (select){
+                case 1:
+                    ui.printMessage("Indtast ny email: ");
+                    String newMail = ui.getStrInput();
+                    selectedMember.setEmail(newMail);
+                    break;
+                case 2:
+                    ui.printMessage("Indtast nyt telefonnummer: ");
+                    int newNo = ui.getIntInput();
+                    selectedMember.setPhone(newNo);
+                    break;
+                case 3:
+                    ui.printMessage("Vælg nyt medlemsskab (id): ");
+                    int msNo = ui.getIntInput();
+                    Membership tmpMembership = selectedMember.getMembership();
+                    for(Membership ms: memberships){
+                        if(ms.getId() == msNo){
+                            tmpMembership = ms;
+                        }
+                    }
+                    selectedMember.setMembership(tmpMembership);
+                    ui.printMessage(tmpMembership.getName() + " er valgt som nyt medlemsskab!\n");
+                    break;
+                default:
+                    ui.printMenu("Ændre E-mail;Ændre telefonnummer;Ændre medlemskab");
+                    select = ui.getIntInput();
+            }
         //TODO: Kode
     }
 
-    /*
+    /**
      * Ændre attributter på eksisterende medlem
-     */
+     **/
     private void deleteMember(){
         //TODO: Kode
     }

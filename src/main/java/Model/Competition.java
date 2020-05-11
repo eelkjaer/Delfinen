@@ -23,6 +23,14 @@ public class Competition {
         return name;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
