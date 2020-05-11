@@ -21,7 +21,19 @@ abstract public class MainController {
     public ArrayList<Competition> competitions;
     public ArrayList<Team> teams;
 
-    UI ui = new UI();
+
+
+    //Klasser til brug i controlleren
+    MemberHandler memberHandler = new MemberHandler();
+
+    protected UI ui = new UI();
+    protected UserMapper userMapper = new UserMapper();
+    protected MembershipMapper membershipMapper = new MembershipMapper();
+    protected MemberMapper memberMapper = new MemberMapper();
+    protected PaymentMapper paymentMapper = new PaymentMapper();
+    protected CompetitionMapper competitionMapper = new CompetitionMapper();
+    protected ResultMapper resultMapper = new ResultMapper();
+    protected TeamMapper teamMapper = new TeamMapper();
 
     //Fælles metoder
 
@@ -30,19 +42,9 @@ abstract public class MainController {
      * @param filter Viser top 5 under følgende filtre: "junior" eller "senior"
      */
     public void showTop(String filter){
-    switch (filter){
-        case "junior":
-            //TODO: Code
-            System.out.println(filter + " valgt");
-            showMenu();
-        case "senior":
-            //TODO: Code
-            System.out.println(filter + " valgt");
-            showMenu();
-        default:
-            System.out.println("Default valgt");
-            showMenu();
-        }
+        ui.printMessage("Show top 5 " + filter);
+        ui.printMessage(memberHandler.showTopSwimmers(filter));
+        showMenu();
     }
 
 
@@ -110,13 +112,16 @@ abstract public class MainController {
     }
 
     public void refreshData(){
-        users = new UserMapper().getUsers();
-        memberships = new MembershipMapper().getMemberships();
-        members = new MemberMapper().getAllMembers(memberships);
-        payments = new PaymentMapper().getAllPayments(members);
-        competitions = new CompetitionMapper().getCompetitions();
-        results = new ResultMapper().getResults(members,competitions);
-        teams = new TeamMapper().getTeams(members, users);
+        users = userMapper.getUsers();
+        memberships = membershipMapper.getMemberships();
+        members = memberMapper.getAllMembers(memberships);
+        payments = paymentMapper.getAllPayments(members);
+        competitions = competitionMapper.getCompetitions();
+        results = resultMapper.getResults(members,competitions);
+        teams = teamMapper.getTeams(members, users);
+        memberHandler.setMembers(members);
+        memberHandler.setMemberships(memberships);
+        memberHandler.setResults(results);
     }
 
 }

@@ -53,6 +53,51 @@ public class MemberMapper {
         return tmpMembers;
     }
 
+    protected int[] getTopFive (String filter){
+        String query = "";
+        int[] result = new int[5];
+
+        switch(filter){
+            case "junior":
+                query = "SELECT Members.ID AS \"MemberID\", Results.ID AS \"ResultID\"\n" +
+                        "FROM Members\n" +
+                        "INNER JOIN Results ON Results.MemberID = Members.ID\n" +
+                        "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
+                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` = \"Junior\"\n" +
+                        "ORDER BY ResultTime ASC LIMIT 5";
+            case "senior":
+                query = "SELECT Members.ID AS \"MemberID\", Results.ID AS \"ResultID\"\n" +
+                        "FROM Members\n" +
+                        "INNER JOIN Results ON Results.MemberID = Members.ID\n" +
+                        "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
+                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` = \"Senior\"\n" +
+                        "ORDER BY ResultTime ASC LIMIT 5";
+
+        }
+
+        Connection connection = DBConnector.getInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+
+            ResultSet resultset = statement.executeQuery(query);
+            int counter = 0;
+
+            while(resultset.next()) {
+                int memberID = resultset.getInt("MemberID");
+                int resultID = resultset.getInt("ResultID");
+
+                //String str = memberID + "#" + resultID;
+                //result[counter] = str;
+                result[counter] = resultID;
+                counter++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return result;
+
+    }
+
     /**
      * Indsætter nyt Member objekt i SQL og retunerer dette med korrekt id
      * @param member Memberobjekt som skal indsættes i databasen
