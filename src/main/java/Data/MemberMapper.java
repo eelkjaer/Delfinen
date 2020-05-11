@@ -3,10 +3,7 @@ package Data;
 import Model.*;
 import Util.DBConnector;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -98,14 +95,34 @@ public class MemberMapper {
 
     }
 
-    /**
-     * Indsætter nyt Member objekt i SQL og retunerer dette med korrekt id
-     * @param member Memberobjekt som skal indsættes i databasen
-     **/
-    protected Member createNewMember(Member member){
-        Member tmpMember = member;
+    protected Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
+        Connection connection = DBConnector.getInstance().getConnection();
 
-        return tmpMember;
+        try {
+            String query = "INSERT INTO members(Name, Birthday, Email, PhoneNo, Membership) VALUES (?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+
+            Date ltd = Date.valueOf(birthday);
+
+
+            statement.setString(1,name);
+            statement.setDate(2,ltd);
+            statement.setString(3,email);
+            statement.setInt(4,phone);
+            statement.setInt(5,membership.getId());
+            statement.executeUpdate();
+            ResultSet tableKeys = statement.getGeneratedKeys();
+            tableKeys.next();
+            int member_id = tableKeys.getInt(1);
+
+            Member tmpMember = new Member(member_id, name, birthday, email, phone,membership);
+
+            return tmpMember;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     /**
