@@ -47,17 +47,17 @@ public class AdminController extends MainController {
         }
     }
 
-    /*
+    /**
      * Opretter nyt medlem
-     */
+     **/
     private void registerNewMember(){
         //TODO: Kode
 
     }
 
-    /*
+    /**
      * Ændre attributter på eksisterende medlem
-     */
+     **/
     private void changeMember(){
             ui.printMessage("Indtast medlemsnummer: ");
             int memNo = ui.getIntInput();
@@ -101,9 +101,9 @@ public class AdminController extends MainController {
         //TODO: Kode
     }
 
-    /*
+    /**
      * Ændre attributter på eksisterende medlem
-     */
+     **/
     private void deleteMember(){
         //TODO: Kode
     }

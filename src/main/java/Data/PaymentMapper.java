@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PaymentMapper {
+    /**
+     * @param members En liste over medlemmer
+     * @return En liste med alle betalinger
+     */
     public ArrayList<Payment> getAllPayments(ArrayList<Member> members){
         ArrayList<Payment> tmpPayments = new ArrayList<>();
 
@@ -42,6 +46,11 @@ public class PaymentMapper {
         return tmpPayments;
     }
 
+    /**
+     * @param member Medlemmet som har betalt
+     * @param paid Hvor meget medlemmet har betalt
+     * @return Betalingsobjektet
+     */
     public Payment createNewPayment(Member member, double paid){
         int memberId = member.getId();
 

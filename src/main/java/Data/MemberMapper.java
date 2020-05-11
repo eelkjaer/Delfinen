@@ -11,11 +11,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MemberMapper {
-    /*
+    /**
      * Henter alle medlemmer fra SQL
      * Opretter Member objekter
      * Tilføjer dem til en midlertidig ArrayList som bliver retuneret
-     */
+     * @param memberships ArrayListe med mulige memberships.
+     **/
     public ArrayList<Member> getAllMembers(ArrayList<Membership> memberships){
         ArrayList<Member> tmpMembers = new ArrayList<>();
 
@@ -52,26 +53,29 @@ public class MemberMapper {
         return tmpMembers;
     }
 
-    /*
+    /**
      * Indsætter nyt Member objekt i SQL og retunerer dette med korrekt id
-     */
+     * @param member Memberobjekt som skal indsættes i databasen
+     **/
     protected Member createNewMember(Member member){
         Member tmpMember = member;
 
         return tmpMember;
     }
 
-    /*
+    /**
      * Ændre data i SQL på medlemmet.
-     */
+     * @param id Medlemsnummer som skal ændres i databasen
+     **/
     protected Member editMember(int id){
 
         return null;
     }
 
-    /*
+    /**
      * Sletter valgt medlem fra SQL
-     */
+     * @param id Medlemsnummer som skal slettes i databasen
+     **/
     protected boolean deleteMember(int id){
         return false;
     }

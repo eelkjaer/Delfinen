@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 abstract public class MainController {
     //Abstrakte ting til nedarvning
-    /*
+    /**
      * Viser menuen vha. UI til brugeren
-     */
+     **/
     public abstract void showMenu();
 
     //Variabler til controlleren
@@ -25,8 +25,9 @@ abstract public class MainController {
 
     //Fælles metoder
 
+
     /**
-     * Viser top 5 svømmere indenfor hver kategori
+     * @param filter Viser top 5 under følgende filtre: "junior" eller "senior"
      */
     public void showTop(String filter){
     switch (filter){
@@ -44,8 +45,9 @@ abstract public class MainController {
         }
     }
 
-    /*
-     * Viser en liste over medlemmer med restance
+
+    /**
+     * Viser en lister over restancer
      */
     public void showMissingPayments(){
         //TODO: Kode
@@ -89,18 +91,18 @@ abstract public class MainController {
         showMenu();
     }
 
-    /*
+    /**
      * Viser de nuværende kontigentsatser
-     */
+     **/
     public void showContingents(){
         //TODO: Kode
 
         showMenu();
     }
 
-    /*
+    /**
      * Ændre kontingentsatserne
-     */
+     **/
     public void changeContingents(){
         //TODO: Kode
 
@@ -116,12 +118,5 @@ abstract public class MainController {
         results = new ResultMapper().getResults(members,competitions);
         teams = new TeamMapper().getTeams(members, users);
     }
-
-    public void logout(){
-        System.out.println("Du er logget ud!");
-        System.exit(0);
-    }
-
-
 
 }

@@ -35,6 +35,13 @@ public class CompetitionMapper {
         return tmpCompetitions;
     }
 
+    /**
+     * Tilføj nyt entry til databasen
+     * @param name Konkurrencens navn
+     * @param location Konkurrencens placering
+     * @param datetime Hvornår starter konkurrencen
+     * @return Konkurrence(Competition) objekt
+     */
     public Competition addNewCompetition(String name, String location, LocalDateTime datetime){
         Connection connection = DBConnector.getInstance().getConnection();
         try {

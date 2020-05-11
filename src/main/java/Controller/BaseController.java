@@ -34,4 +34,9 @@ public class BaseController {
         ui.printMessage("Du er nu logget ud!\n\n");
         login();
     }
+
+    private void exitApplication(){
+        ui.printMessage("Farvel !");
+        System.exit(0);
+    }
 }
