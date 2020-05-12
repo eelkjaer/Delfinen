@@ -137,6 +137,7 @@ public class AdminController extends MainController {
                     ui.printMenu("Ændre E-mail;Ændre telefonnummer;Ændre medlemskab");
                     select = ui.getIntInput();
             }
+            showMenu();
         //TODO: Kode
     }
 

@@ -41,4 +41,12 @@ public class UserHandler {
         }
             return tmpUser;
     }
+
+    public void updateUsers() {
+        this.users = userMapper.getUsers();
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
 }

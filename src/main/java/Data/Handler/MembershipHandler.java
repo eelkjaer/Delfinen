@@ -20,4 +20,13 @@ public class MembershipHandler {
     public void updateMemberships(){
         this.memberships = memberMapper.getMemberships();
     }
+
+    public String showMemberships() {
+        String str = "";
+        for(Membership m: memberships){
+            str += "\n Kontigentets navn: " + m.getName() +
+                    "\n Kontigentets pris: " + m.getPrice() + " kr pr. År\n";
+        }
+        return str;
+    }
 }
