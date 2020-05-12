@@ -1,5 +1,6 @@
 package Data;
 
+import Data.Handler.*;
 import Model.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,34 +10,33 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 public class MemberMapperTest {
-    public ArrayList<User> users;
-    public ArrayList<Member> members;
-    public ArrayList<Membership> memberships;
-    public ArrayList<Result> results;
-    public ArrayList<Payment> payments;
-    public ArrayList<Competition> competitions;
-    public ArrayList<Team> teams;
-    MemberMapper memberMapper = new MemberMapper();
-    MembershipMapper membershipMapper = new MembershipMapper();
+    protected UserHandler userHandler = new UserHandler();
+    protected MemberHandler memberHandler = new MemberHandler();
+    protected MembershipHandler membershipHandler = new MembershipHandler();
+    protected PaymentHandler paymentHandler = new PaymentHandler();
+    protected CompetitionHandler competitionHandler = new CompetitionHandler();
+    protected ResultHandler resultHandler = new ResultHandler();
+    protected TeamHandler teamHandler = new TeamHandler();
     Member actualMember;
     //ArrayList<Member> members;
    // ArrayList<Membership> memberships;
     @BeforeEach
     public void setUp(){
-        users = new UserMapper().getUsers();
-        memberships = new MembershipMapper().getMemberships();
-        members = new MemberMapper().getAllMembers(memberships);
-        payments = new PaymentMapper().getAllPayments(members);
-        competitions = new CompetitionMapper().getCompetitions();
-        results = new ResultMapper().getResults(members,competitions);
-        teams = new TeamMapper().getTeams(members, users);
-        memberships = membershipMapper.getMemberships();
-        members = memberMapper.getAllMembers(memberships);
+        userHandler.updateUsers();
+        membershipHandler.updateMemberships();
+        memberHandler.updateMembers(membershipHandler.getMemberships());
+        paymentHandler.updatePayments(memberHandler.getMembers());
+        competitionHandler.updateCompetitions();
+        resultHandler.updateResults(memberHandler.getMembers(),competitionHandler.getCompetitions());
+        teamHandler.updateResults(memberHandler.getMembers(),userHandler.getUsers());
+        memberHandler.setMembers(memberHandler.getMembers());
+        memberHandler.setMemberships(membershipHandler.getMemberships());
+        memberHandler.setResults(resultHandler.getResults());
     }
 
     @Test
     public void getID(){
-        System.out.println(memberships);
+        System.out.println(membershipHandler.getMemberships());
         /*
         int expected = 90631;
         actualMember = members.get(90631);
