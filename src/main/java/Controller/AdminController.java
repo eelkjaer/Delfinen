@@ -15,7 +15,7 @@ public class AdminController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Ændre kontigenter;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Ændre kontigenter;Se Top 5 - Junior;Se Top 5 - Senior;Log ud;Print alle objekter");
         int select = ui.getIntInput();
         switch (select){
             case 1:
@@ -45,6 +45,9 @@ public class AdminController extends MainController {
             case 9:
                 base.logout();
                 break;
+            case 10: //ONLY FOR DEVELOPMENT
+                objectTesting();
+                showMenu();
             default:
                 ui.printMessage(select + " findes ikke!\n");
                 showMenu();
