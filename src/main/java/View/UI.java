@@ -50,15 +50,7 @@ public class UI implements UIInterface{
     }
 
     public double getDoubleInput(){
-        String str;
-        while(!input.hasNextDouble()){
-            System.out.println("Det er ikke et decimal tal!");
-        }
-        str = input.nextLine();
-        if(str.isEmpty()){
-            printMessage("\nDit input er tomt!\n");
-            getDoubleInput();
-        }
+        String str = input.nextLine();
         return Double.parseDouble(str);
     }
 

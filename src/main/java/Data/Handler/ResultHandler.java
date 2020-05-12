@@ -3,6 +3,8 @@ package Data.Handler;
 import Data.Mapper.*;
 import Model.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ResultHandler {
@@ -17,7 +19,34 @@ public class ResultHandler {
         this.results = results;
     }
 
+    public Result addResult(Result result){
+        if(!results.contains(result)){
+            results.add(result);
+        }
+        return result;
+    }
+
     public void updateResults(ArrayList<Member> members, ArrayList<Competition> competitions) {
         this.results = resultMapper.getResults(members,competitions);
+    }
+
+
+    public Result registerResult(Member member, int diciplin,Competition competition, double resultTime, String training){
+        String diciplinStr = "";
+        switch (diciplin){
+            case 1:
+                diciplinStr = "crawl";
+            case 2:
+                diciplinStr = "buttefly";
+            case 3:
+                diciplinStr = "rygcrawl";
+            case 4:
+                diciplinStr = "bryst";
+        }
+        boolean trainingbool = training.equals("ja".toLowerCase());
+
+        Result tmpResult = resultMapper.addNewResult(member,diciplinStr,competition,100.0,resultTime,trainingbool);
+
+        return addResult(tmpResult);
     }
 }

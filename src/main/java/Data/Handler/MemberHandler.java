@@ -19,6 +19,15 @@ public class MemberHandler {
 
     }
 
+    public Member getMemberById(int id){
+        for(Member m:members){
+            if(m.getId() == id){
+                return m;
+            }
+        }
+        return null;
+    }
+
     public void updateMembers(ArrayList<Membership> memberships){
         this.memberships = memberships;
         this.members = memberMapper.getAllMembers(this.memberships);
@@ -50,6 +59,11 @@ public class MemberHandler {
 
     public void setResults(ArrayList<Result> results) {
         this.results = results;
+    }
+
+
+    public void updateMember(Member member){
+        members.set(members.indexOf(member),memberMapper.editMember(member));
     }
 
     /**

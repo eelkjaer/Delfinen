@@ -3,6 +3,10 @@ import Data.Handler.*;
 import Model.*;
 import View.*;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 
 abstract public class MainController {
     //Abstrakte ting til nedarvning
@@ -85,10 +89,44 @@ abstract public class MainController {
     }
 
     /**
-     * Ændre kontingentsatserne
+     * Tilføjer nyt resultat
      **/
-    public void changeContingents(){
-        //TODO: Kode
+    public void addResult(){
+        ui.printMessage("Tilføj nyt resultat\n");
+
+        ui.printMessage("\nIndtast medlemmets id: ");
+        int id = ui.getIntInput();
+        Member resultMember = memberHandler.getMemberById(id);
+
+        ui.printMessage("\nVælg en af følgende dicipliner: ");
+        ui.printMessage("\n1) Crawl");
+        ui.printMessage("\n2) Butterfly");
+        ui.printMessage("\n3) Rygcrawl");
+        ui.printMessage("\n4) Brystsvømning");
+        ui.printMessage("\n Indtast dit valg: ");
+        int diciplin = ui.getIntInput();
+
+        ui.printMessage("\nDer er følgende stævner:");
+
+        for(Competition c: competitionHandler.getCompetitions()){
+            ui.printMessage("\n\nID: " + c.getId() + "\nNavn: " + c.getName()+"\n");
+        }
+
+        ui.printMessage("\nIndtast stævne ID: ");
+        int competitionid = ui.getIntInput();
+        Competition resultCompetition = competitionHandler.getCompetitionById(competitionid);
+
+        ui.printMessage("\nIndtast svømmetiden i sekunder (decimaltal): ");
+        double resulttime = ui.getDoubleInput();
+
+        ui.printMessage("\nVar det en træningstid? (ja/nej): ");
+        String training = ui.getStrInput().toLowerCase();
+
+
+        Result tmpResult = resultHandler.registerResult(resultMember,diciplin,resultCompetition,resulttime,training);
+        resultHandler.addResult(tmpResult);
+
+        ui.printMessage("\nNyt resultat tilføjet!\n\n");
 
         showMenu();
     }

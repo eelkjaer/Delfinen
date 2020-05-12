@@ -49,36 +49,6 @@ public class MemberMapper {
         }
         return tmpMembers;
     }
-    public ArrayList<Member> getAllMembers(){
-        ArrayList<Member> tmpMembers = new ArrayList<>();
-
-        Connection connection = DBConnector.getInstance().getConnection();
-        try {
-            Statement statement = connection.createStatement();
-
-            String query = "SELECT * FROM Members;";
-
-            ResultSet resultset = statement.executeQuery(query);
-
-            while(resultset.next()) {
-                int id = resultset.getInt("ID");
-                String name = resultset.getString("Name");
-                LocalDate birthday = resultset.getDate("Birthday").toLocalDate();
-                String email = resultset.getString("Email");
-                int phone = resultset.getInt("PhoneNo");
-                int membershipId = resultset.getInt("Membership");
-                Membership tmpMembership = null;
-
-
-                Member tmpMember = new Member(id,name,birthday,email,phone,tmpMembership);
-
-                tmpMembers.add(tmpMember);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        return tmpMembers;
-    }
 
     public int[] getTopFive(String filter){
         String query = "";
@@ -163,11 +133,28 @@ public class MemberMapper {
 
     /**
      * Ændre data i SQL på medlemmet.
-     * @param id Medlemsnummer som skal ændres i databasen
+     * @param member Medlemsobjekt med ændringer
      **/
-    protected Member editMember(int id){
+    public Member editMember(Member member){
+        Connection connection = DBConnector.getInstance().getConnection();
 
-        return null;
+        try {
+            String query = "UPDATE Members SET Email=?, PhoneNo=?, Membership=? WHERE ID=? AND Name=? ";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1,member.getEmail());
+            statement.setInt(2,member.getPhone());
+            statement.setInt(3,member.getMembership().getId());
+            statement.setInt(4,member.getId());
+            statement.setString(5,member.getName());
+            statement.executeUpdate();
+
+            return member;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return member;
     }
 
     /**

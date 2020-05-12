@@ -21,10 +21,6 @@ public class Member {
         this.membership = membership;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public Member getMemberByID(int id, ArrayList<Member> list){
         for(Member m:list){
             if(m.getId() == id){
@@ -32,10 +28,6 @@ public class Member {
             }
         }
         return null;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int calculateAge() {
@@ -46,20 +38,40 @@ public class Member {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getPhone() {
+        return phone;
     }
 
     public void setPhone(int phone) {
         this.phone = phone;
     }
 
-    public void setMembership(Membership membership) {
-        this.membership = membership;
-    }
-
     public Membership getMembership() {
         return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 
     @Override

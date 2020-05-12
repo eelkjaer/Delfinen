@@ -16,4 +16,13 @@ public class CompetitionHandler {
     public void updateCompetitions(){
         this.competitions = competitionMapper.getCompetitions();
     }
+
+    public Competition getCompetitionById(int id){
+        for(Competition c: competitions){
+            if(c.getId() == id){
+                return c;
+            }
+        }
+        return null;
+    }
 }

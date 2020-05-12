@@ -8,16 +8,19 @@ public class UserController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilføj Resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
+                //Tilføj resultat
+                addResult();
+            case 2:
                 // Se top 5 junior
                 showTop("junior");
-            case 2:
+            case 3:
                 // Se top 5 senior
                 showTop("senior");
-            case 3:
+            case 4:
                 base.logout();
                 break;
             default:
