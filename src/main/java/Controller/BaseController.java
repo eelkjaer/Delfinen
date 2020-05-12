@@ -1,6 +1,6 @@
 package Controller;
 
-import Data.UserHandler;
+import Data.Handler.UserHandler;
 import Model.User;
 import View.UI;
 

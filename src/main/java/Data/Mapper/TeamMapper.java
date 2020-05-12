@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -37,8 +37,8 @@ public class TeamMapper {
 
                 ArrayList<Member> teamMembers = new ArrayList<>();
                 for(Member m:members){
-                    for(int i=0;memberIDs.length>i;i++){
-                        if(m.getId() == Integer.parseInt(memberIDs[i])){
+                    for (String memberID : memberIDs) {
+                        if (m.getId() == Integer.parseInt(memberID)) {
                             teamMembers.add(m);
                         }
                     }

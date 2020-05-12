@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -50,7 +50,7 @@ public class MemberMapper {
         return tmpMembers;
     }
 
-    protected int[] getTopFive (String filter){
+    public int[] getTopFive(String filter){
         String query = "";
         int[] result = new int[5];
 
@@ -103,7 +103,7 @@ public class MemberMapper {
      * @param membership Membership object for the member
      * @return workable Member object
      */
-    protected Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
+    public Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
         Connection connection = DBConnector.getInstance().getConnection();
 
         try {
@@ -144,7 +144,7 @@ public class MemberMapper {
      * Sletter valgt medlem fra SQL
      * @param id Medlemsnummer som skal slettes i databasen
      **/
-    protected boolean deleteMember(int id) {
+    public boolean deleteMember(int id) {
         Connection connection = DBConnector.getInstance().getConnection();
 
         try {

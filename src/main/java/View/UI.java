@@ -46,8 +46,7 @@ public class UI implements UIInterface{
             str = input.nextLine();
         }
 
-        int select = Integer.parseInt(str.trim());
-        return select;
+        return Integer.parseInt(str.trim());
     }
 
     public double getDoubleInput(){

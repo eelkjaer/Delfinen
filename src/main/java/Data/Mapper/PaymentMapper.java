@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -47,7 +47,7 @@ public class PaymentMapper {
     }
 
     public String getMissingPayments(){
-        String str = "";
+        StringBuilder str = new StringBuilder();
         Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
@@ -75,16 +75,16 @@ public class PaymentMapper {
                 double restance = resultset.getDouble("Restance");
 
                 if(restance>0){
-                    str += "\n"+memberName+" (ID: " + memberID + ") har " + restance+" kr til gode\n";
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") har ").append(restance).append(" kr til gode\n");
                 } else {
-                    str += "\n"+memberName+" (ID: " + memberID + ") skylder " + restance+" kr\n";
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") skylder ").append(restance).append(" kr\n");
                 }
 
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -108,9 +108,7 @@ public class PaymentMapper {
             int id = tableKeys.getInt(1);
             LocalDateTime timestamp = tableKeys.getTimestamp("Timestamp").toLocalDateTime();
 
-            Payment tmpPayment = new Payment(id,member,paid,timestamp);
-
-            return tmpPayment;
+            return new Payment(id,member,paid,timestamp);
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

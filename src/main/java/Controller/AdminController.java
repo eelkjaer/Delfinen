@@ -72,7 +72,7 @@ public class AdminController extends MainController {
         int age = Period.between(LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd-MM-yyyy")), LocalDate.now()).getYears();
 
         ui.printMessage("\nMulige kontigenter: ");
-        for(Membership ms: memberships){
+        for(Membership ms: membershipHandler.getMemberships()){
             if(age <= 18 && !ms.getName().equals("Senior")){
                 ui.printMessage("\n"+ms.getId() + ") " + ms.getName() + " - pris pr. år: " + ms.getPrice());
             } else if (age >= 18 && !ms.getName().equals("Junior")){
@@ -101,7 +101,7 @@ public class AdminController extends MainController {
             int memNo = ui.getIntInput();
             Member selectedMember = null;
 
-            for (Member m : members) {
+            for (Member m : memberHandler.getMembers()) {
                 if (m.getId() == memNo) {
                     selectedMember = m;
                 }
@@ -125,7 +125,7 @@ public class AdminController extends MainController {
                     ui.printMessage("Vælg nyt medlemsskab (id): ");
                     int msNo = ui.getIntInput();
                     Membership tmpMembership = selectedMember.getMembership();
-                    for(Membership ms: memberships){
+                    for(Membership ms: membershipHandler.getMemberships()){
                         if(ms.getId() == msNo){
                             tmpMembership = ms;
                         }
@@ -148,7 +148,7 @@ public class AdminController extends MainController {
         int memNo = ui.getIntInput();
         Member selectedMember = null;
 
-        for (Member m : members) {
+        for (Member m : memberHandler.getMembers()) {
             if (m.getId() == memNo) {
                 selectedMember = m;
             }

@@ -1,5 +1,6 @@
 package Controller;
-import Data.*;
+import Data.Handler.*;
+import Data.Mapper.*;
 import Model.*;
 import View.*;
 
@@ -14,53 +15,45 @@ abstract public class MainController {
 
     //Variabler til controlleren
     public ArrayList<User> users;
-    public ArrayList<Member> members;
-    public ArrayList<Membership> memberships;
-    public ArrayList<Result> results;
-    public ArrayList<Payment> payments;
-    public ArrayList<Competition> competitions;
-    public ArrayList<Team> teams;
 
 
 
     //Klasser til brug i controlleren
     protected MemberHandler memberHandler = new MemberHandler();
+    protected MembershipHandler membershipHandler = new MembershipHandler();
+    protected PaymentHandler paymentHandler = new PaymentHandler();
+    protected CompetitionHandler competitionHandler = new CompetitionHandler();
+    protected ResultHandler resultHandler = new ResultHandler();
+    protected TeamHandler teamHandler = new TeamHandler();
 
     protected UI ui = new UI();
     protected UserMapper userMapper = new UserMapper();
-    protected MembershipMapper membershipMapper = new MembershipMapper();
-    protected MemberMapper memberMapper = new MemberMapper();
-    protected PaymentMapper paymentMapper = new PaymentMapper();
-    protected PaymentHandler paymentHandler = new PaymentHandler();
-    protected CompetitionMapper competitionMapper = new CompetitionMapper();
-    protected ResultMapper resultMapper = new ResultMapper();
-    protected TeamMapper teamMapper = new TeamMapper();
 
     //Fælles metoder
 
     public void objectTesting(){
         /* FOR DEVELOPMENT PURPOSES */
-        for(Competition c: competitions){
+        for(Competition c: competitionHandler.getCompetitions()){
             System.out.println(c);
         }
 
-        for(Member m: members){
+        for(Member m: memberHandler.getMembers()){
             System.out.println(m);
         }
 
-        for(Membership ms: memberships){
+        for(Membership ms: membershipHandler.getMemberships()){
             System.out.println(ms);
         }
 
-        for(Payment p: payments){
+        for(Payment p: paymentHandler.getPayments()){
             System.out.println(p);
         }
 
-        for(Result r: results){
+        for(Result r: resultHandler.getResults()){
             System.out.println(r);
         }
 
-        for(Team t: teams){
+        for(Team t: teamHandler.getTeams()){
             System.out.println(t);
         }
 
@@ -109,15 +102,15 @@ abstract public class MainController {
 
     public void refreshData(){
         users = userMapper.getUsers();
-        memberships = membershipMapper.getMemberships();
-        members = memberMapper.getAllMembers(memberships);
-        payments = paymentMapper.getAllPayments(members);
-        competitions = competitionMapper.getCompetitions();
-        results = resultMapper.getResults(members,competitions);
-        teams = teamMapper.getTeams(members, users);
-        memberHandler.setMembers(members);
-        memberHandler.setMemberships(memberships);
-        memberHandler.setResults(results);
+        membershipHandler.updateMemberships();
+        memberHandler.updateMembers(membershipHandler.getMemberships());
+        paymentHandler.updatePayments(memberHandler.getMembers());
+        competitionHandler.updateCompetitions();
+        resultHandler.updateResults(memberHandler.getMembers(),competitionHandler.getCompetitions());
+        teamHandler.updateResults(memberHandler.getMembers(),users);
+        memberHandler.setMembers(memberHandler.getMembers());
+        memberHandler.setMemberships(membershipHandler.getMemberships());
+        memberHandler.setResults(resultHandler.getResults());
     }
 
 }

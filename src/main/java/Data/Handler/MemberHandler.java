@@ -1,8 +1,7 @@
-package Data;
+package Data.Handler;
 
-import Model.Member;
-import Model.Membership;
-import Model.Result;
+import Data.Mapper.*;
+import Model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,8 +19,9 @@ public class MemberHandler {
 
     }
 
-    public ArrayList<Membership> getMemberships() {
-        return memberships;
+    public void updateMembers(ArrayList<Membership> memberships){
+        this.memberships = memberships;
+        this.members = memberMapper.getAllMembers(this.memberships);
     }
 
     public void setMemberships(ArrayList<Membership> memberships) {

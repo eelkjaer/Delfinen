@@ -1,13 +1,12 @@
-package Data;
+package Data.Handler;
 
+import Data.Mapper.PaymentMapper;
 import Model.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class PaymentHandler {
-    private PaymentMapper paymentMapper = new PaymentMapper();
+    private final PaymentMapper paymentMapper = new PaymentMapper();
     private ArrayList<Member> members;
     private ArrayList<Payment> payments;
 
@@ -21,6 +20,11 @@ public class PaymentHandler {
 
     public ArrayList<Payment> getPayments() {
         return payments;
+    }
+
+    public void updatePayments(ArrayList<Member> members){
+        this.members = members;
+        this.payments = paymentMapper.getAllPayments(this.members);
     }
 
     public void setPayments(ArrayList<Payment> payments) {
