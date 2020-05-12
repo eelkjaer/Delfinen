@@ -51,6 +51,15 @@ public class ResultMapper {
         return tmpResults;
     }
 
+    /**
+     * @param member Member objekt som skal tilknyttes
+     * @param diciplin ENUM('bryst','crawl','rygcrawl','butterfly')
+     * @param competition Competition objekt som skal tilknyttes
+     * @param resultMeters Default: 100.0
+     * @param resultTime Tid i sekunder
+     * @param training self-explainitory
+     * @return Result objekt
+     */
     public Result addNewResult(Member member, String diciplin, Competition competition, Double resultMeters, double resultTime, boolean training){
         int memberId = member.getId();
         int competitionId = competition.getId();
