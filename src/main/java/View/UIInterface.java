@@ -1,13 +1,13 @@
 package View;
 
 public interface UIInterface {
-    public void printMessage(String str);
+    void printMessage(String str);
 
-    public void printMenu(String menuStr);
+    void printMenu(String menuStr);
 
-    public String getStrInput();
+    String getStrInput();
 
-    public int getIntInput();
+    int getIntInput();
 
-    public double getDoubleInput();
+    double getDoubleInput();
 }

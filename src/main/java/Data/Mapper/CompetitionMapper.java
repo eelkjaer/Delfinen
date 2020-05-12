@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -56,9 +56,7 @@ public class CompetitionMapper {
             tableKeys.next();
             int id = tableKeys.getInt(1);
 
-            Competition tmpCompetition = new Competition(id,name,location,datetime);
-
-            return tmpCompetition;
+            return new Competition(id,name,location,datetime);
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

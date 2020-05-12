@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -80,7 +80,7 @@ public class MemberMapper {
         return tmpMembers;
     }
 
-    protected int[] getTopFive (String filter){
+    public int[] getTopFive(String filter){
         String query = "";
         int[] result = new int[5];
 
@@ -125,11 +125,19 @@ public class MemberMapper {
 
     }
 
-    protected Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
+    /**
+     * @param name Members full name
+     * @param birthday Birthday
+     * @param email E-mail for contact
+     * @param phone Phone no. For Member (Format: 8 digits)
+     * @param membership Membership object for the member
+     * @return workable Member object
+     */
+    public Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
         Connection connection = DBConnector.getInstance().getConnection();
 
         try {
-            String query = "INSERT INTO members(Name, Birthday, Email, PhoneNo, Membership) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO Members(Name, Birthday, Email, PhoneNo, Membership) VALUES (?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 
             Date ltd = Date.valueOf(birthday);
@@ -143,11 +151,9 @@ public class MemberMapper {
             statement.executeUpdate();
             ResultSet tableKeys = statement.getGeneratedKeys();
             tableKeys.next();
-            int member_id = tableKeys.getInt(1);
+            int memberID = tableKeys.getInt(1);
 
-            Member tmpMember = new Member(member_id, name, birthday, email, phone,membership);
-
-            return tmpMember;
+            return new Member(memberID, name, birthday, email, phone, membership);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -168,7 +174,29 @@ public class MemberMapper {
      * Sletter valgt medlem fra SQL
      * @param id Medlemsnummer som skal slettes i databasen
      **/
-    protected boolean deleteMember(int id){
+    public boolean deleteMember(int id) {
+        Connection connection = DBConnector.getInstance().getConnection();
+
+        try {
+            String query = "DELETE FROM Members WHERE Members.ID = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+            String confirmQuery = "SELECT * FROM Members WHERE Members.ID=?";
+            statement = connection.prepareStatement(confirmQuery);
+
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+
+            if (!result.next()) {
+                return true;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return false;
+        }
     }
-}

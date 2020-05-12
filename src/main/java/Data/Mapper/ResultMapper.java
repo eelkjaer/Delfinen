@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -71,9 +71,7 @@ public class ResultMapper {
             tableKeys.next();
             int id = tableKeys.getInt(1);
 
-            Result tmpResult = new Result(id,member,diciplin,competition,resultMeters,resultTime,training);
-
-            return tmpResult;
+            return new Result(id,member,diciplin,competition,resultMeters,resultTime,training);
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

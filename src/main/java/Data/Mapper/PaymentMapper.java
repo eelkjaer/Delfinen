@@ -1,4 +1,4 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
@@ -46,6 +46,47 @@ public class PaymentMapper {
         return tmpPayments;
     }
 
+    public String getMissingPayments(){
+        StringBuilder str = new StringBuilder();
+        Connection connection = DBConnector.getInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT\n" +
+                    "	Members.ID AS \"MemberID\",\n" +
+                    "	Members.NAME,\n" +
+                    "	sum( Payments.Paid ) - Memberships.Price AS \"Restance\" \n" +
+                    "FROM\n" +
+                    "	Members\n" +
+                    "	INNER JOIN Payments ON Members.ID = Payments.MemberID\n" +
+                    "	INNER JOIN Memberships ON Members.Membership = Memberships.ID \n" +
+                    "GROUP BY\n" +
+                    "	Members.ID \n" +
+                    "HAVING\n" +
+                    "	Restance < 0 OR Restance > 0 \n" +
+                    "ORDER BY\n" +
+                    "	Restance ASC";
+
+            ResultSet resultset = statement.executeQuery(query);
+
+            while(resultset.next()) {
+                String memberName = resultset.getString("Name");
+                int memberID = resultset.getInt("MemberID");
+                double restance = resultset.getDouble("Restance");
+
+                if(restance>0){
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") har ").append(restance).append(" kr til gode\n");
+                } else {
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") skylder ").append(restance).append(" kr\n");
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return str.toString();
+    }
+
     /**
      * @param member Medlemmet som har betalt
      * @param paid Hvor meget medlemmet har betalt
@@ -67,9 +108,7 @@ public class PaymentMapper {
             int id = tableKeys.getInt(1);
             LocalDateTime timestamp = tableKeys.getTimestamp("Timestamp").toLocalDateTime();
 
-            Payment tmpPayment = new Payment(id,member,paid,timestamp);
-
-            return tmpPayment;
+            return new Payment(id,member,paid,timestamp);
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

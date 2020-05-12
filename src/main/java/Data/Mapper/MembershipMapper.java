@@ -1,40 +1,35 @@
-package Data;
+package Data.Mapper;
 
 import Model.*;
 import Util.DBConnector;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
-public class UserMapper {
-    public ArrayList<User> getUsers(){
-        ArrayList<User> tmpUsers = new ArrayList<>();
+public class MembershipMapper {
+    public ArrayList<Membership> getMemberships(){
+        ArrayList<Membership> tmpMemberships = new ArrayList<>();
 
         Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
-            String query = "SELECT Users.ID, Users.Username, Users.Name FROM Users;";
+            String query = "SELECT * FROM Memberships;";
 
             ResultSet resultset = statement.executeQuery(query);
 
             while(resultset.next()) {
                 int id = resultset.getInt("ID");
-                String username = resultset.getString("Username");
                 String name = resultset.getString("Name");
+                double price = resultset.getDouble("Price");
 
-                User tmpUser = new User(id,username,name);
+                Membership tmpMembership = new Membership(id,name,price);
 
-                tmpUsers.add(tmpUser);
+                tmpMemberships.add(tmpMembership);
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return tmpUsers;
+        return tmpMemberships;
     }
-
-
 }

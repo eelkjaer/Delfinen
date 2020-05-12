@@ -19,6 +19,14 @@ public class Membership {
         return name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
         return "Membership{" +
