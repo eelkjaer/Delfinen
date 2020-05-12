@@ -1,5 +1,64 @@
 @startuml
 
+package Controller{
+    class BaseController {
+
+    }
+
+    abstract class MainController{
+
+        }
+
+    class AdminController {
+
+    }
+
+    class ModeratorController {
+
+    }
+
+    class UserController {
+
+    }
+
+    BaseController <--> MainController
+    MainController <|-- AdminController
+    MainController <|-- ModeratorController
+    MainController <|-- UserController
+
+}
+
+package Data{
+    package Handler{
+
+    }
+
+    package Mapper{
+
+    }
+}
+
+package Model {
+
+}
+
+package Util{
+
+}
+
+package View{
+    interface UIInterface{
+
+    }
+
+    class UI {
+
+    }
+
+    UIInterface <.. UI
+
+}
+
 abstract class AbstractList
 abstract AbstractCollection
 interface List
