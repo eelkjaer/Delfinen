@@ -49,6 +49,36 @@ public class MemberMapper {
         }
         return tmpMembers;
     }
+    public ArrayList<Member> getAllMembers(){
+        ArrayList<Member> tmpMembers = new ArrayList<>();
+
+        Connection connection = DBConnector.getInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM Members;";
+
+            ResultSet resultset = statement.executeQuery(query);
+
+            while(resultset.next()) {
+                int id = resultset.getInt("ID");
+                String name = resultset.getString("Name");
+                LocalDate birthday = resultset.getDate("Birthday").toLocalDate();
+                String email = resultset.getString("Email");
+                int phone = resultset.getInt("PhoneNo");
+                int membershipId = resultset.getInt("Membership");
+                Membership tmpMembership = null;
+
+
+                Member tmpMember = new Member(id,name,birthday,email,phone,tmpMembership);
+
+                tmpMembers.add(tmpMember);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return tmpMembers;
+    }
 
     protected int[] getTopFive (String filter){
         String query = "";
