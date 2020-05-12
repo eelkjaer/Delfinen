@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://104.248.135.65:3306/delfinen</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="delfinen@104.248.135.65" uuid="9f8bd269-8a40-461c-983b-584053854989">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://104.248.135.65:3306/delfinen</jdbc-url>
+    </data-source>
   </component>
 </project>
