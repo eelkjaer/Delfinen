@@ -2,84 +2,263 @@
 
 package Controller{
     class BaseController {
+        UI ui
+        MainController ctrl
+        UserHandler userHandler
 
+        +login(): void
+        +logout(): void
+        -exitApplication(): void
     }
 
     abstract class MainController{
+        +{abstract} void showMenu()
+        #UI ui
+        #UserHandler userHandler
+        #MemberHandler memberHandler
+        #MembershipHandler membershipHandler
+        #PaymentHandler paymentHandler
+        #CompetitionHandler competitionHandler
+        #ResultHandler resultHandler
+        #TeamHandler teamHandler
 
-        }
+        +showTop(String filter): void
+        +showMissingPayments(): void
+        +showContingents(): void
+        +addResult(): void
+        +refreshData(): void
+    }
 
     class AdminController {
+        BaseController base
 
+        +showMenu(): void
+        -registerNewMember(): void
+        -changeMember(): void
+        -deleteMember(): void
     }
 
     class ModeratorController {
+        BaseController base
 
+        +showMenu(): void
     }
 
     class UserController {
+        BaseController base
 
+        +showMenu(): void
     }
 
-    BaseController <--> MainController
-    MainController <|-- AdminController
-    MainController <|-- ModeratorController
-    MainController <|-- UserController
+    BaseController <..> MainController : Use
+    class AdminController extends MainController
+    class ModeratorController extends MainController
+    class UserController extends MainController
 
 }
 
 package Data{
     package Handler{
+        class CompetitionHandler{
 
+        }
+
+        class MemberHandler{
+
+        }
+
+        class MembershipHandler{
+
+        }
+
+        class PaymentHandler{
+
+        }
+
+        class ResultHandler{
+
+        }
+
+        class TeamHandler{
+
+        }
+
+        class UserHandler{
+
+        }
     }
 
     package Mapper{
+        class CompetitionMapper{
 
+        }
+
+        class MemberMapper{
+
+        }
+
+        class MembershipMapper{
+
+        }
+
+        class PaymentMapper{
+
+        }
+
+        class ResultMapper{
+
+        }
+
+        class TeamMapper{
+
+        }
+
+        class UserMapper{
+
+        }
     }
 }
 
 package Model {
+    class Competition{
+        -id: int
+        -name: String
+        -location: String
+        -timestamp: LocalDateTime
+
+        +getId():int
+        +getName(): String
+        +getLocation(): String
+        +getTimestamp(): LocalDateTime
+        +setName(): void
+        +toString(): String
+
+    }
+
+    class Member{
+        -id: int
+        -name: String
+        -birthday: LocalDate
+        -email: String
+        -phone: int
+        -membership: Membership
+
+        +getMemberById(int id, ArrayList<Member> list): Member
+        +calculateAge(): int
+        +getId(): int
+        +getName(): String
+        +getBirthday(): LocalDate
+        +getEmail(): String
+        +getPhone(): int
+        +getMembership(): Membership
+        +setEmail(String email): void
+        +setPhone(int phone): void
+        +setMembership(Membership membership): void
+        +toString(): String
+    }
+
+    class Membership{
+        -id: int
+        -name: String
+        -price: double
+
+        +getId(): int
+        +getName(): String
+        +getPrice(): double
+        +setId(int id): void
+        +toString(): String
+    }
+
+    class Payment{
+        -id: int
+        -member: Member
+        -paid: double
+        -timestamp: LocalDateTime
+
+        +getId(): int
+        +getMember(): Member
+        +setId(int id): void
+        +setMember(Member member): void
+        +toString(): String
+
+    }
+
+    class Result{
+        -id: int
+        -member: Member
+        -diciplin: String
+        -competition: Competition
+        -resultMeters: double
+        -resultTime: double
+        -training: boolean
+
+        +getId(): int
+        +getMember(): Member
+        +setMember(Member member): void
+        +toString(): String
+    }
+
+    class Team{
+        -id: int
+        -name: String
+        -coach: User
+        -teamMembers: ArrayList<Member>
+
+        +toString(): String
+    }
+
+    class User{
+        -id: int
+        -username: String
+        -password: String
+        -name: String
+        -userPermissions: int
+
+        +getUserPermissions(): int
+        +getName(): String
+        +getId(): int
+        +toString(): String
+    }
 
 }
 
 package Util{
+    class DBConnector{
+        -Connection connection;
+        -{static}DBConnector instance;
+        -String serverIP
+        -String serverPort
+        -String serverUsr
+        -String serverPsw
+        -String serverDb
 
+        -DBConnector()
+        +{static}getInstance(): DBConnector
+        +getConnection(): Connection
+    }
 }
 
 package View{
     interface UIInterface{
-
+        void printMessage(String str)
+        void printMenu(String menuStr)
+        String getStrInput()
+        int getIntInput()
+        double getDoubleInput()
     }
 
     class UI {
+        -Scanner input
+        +printMessage(String str)
+        +printMenu(String menuStr)
+        +getStrInput(): String
+        +getIntInput(): int
+        +getDoubleInput(): double
 
     }
 
-    UIInterface <.. UI
+    class UI implements UIInterface
 
-}
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
 }
 
 @enduml

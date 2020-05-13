@@ -7,6 +7,7 @@ public class Result {
     private Competition competition;
     private double resultMeters;
     private double resultTime;
+    private boolean training;
 
     public Result(int id, Member member, String diciplin, Competition competition, double resultMeters, double resultTime , boolean training) {
         this.id = id;
@@ -15,6 +16,7 @@ public class Result {
         this.competition = competition;
         this.resultMeters = resultMeters;
         this.resultTime = resultTime;
+        this.training = training;
     }
 
     public int getId() {
@@ -31,17 +33,25 @@ public class Result {
 
     @Override
     public String toString() {
+        String training = "";
+        if(this.training){
+            training = "Ja";
+        } else {
+            training = "Nej";
+        }
 
         return String.format("%n%n" +
                 "Svømmer: %s (%d)%n"+
                 "Diciplin: %s%n"+
                 "Stævne: %s, %s - %s%n"+
                 "Meter svømmet: %.2f meter%n"+
-                "Tid: %.2f sekunder%n%n",
+                "Tid: %.2f sekunder%n"+
+                "Træningsrunde: %s%n%n",
                 member.getName(),member.getId(),
                 diciplin,
                 competition.getName(),competition.getLocation(),competition.getTimestamp().toString(),
                 resultMeters,
-                resultTime);
+                resultTime,
+                training);
     }
 }
