@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 public class UserHandler {
     private ArrayList<User> users;
-    
-    UI ui = new UI();
-    UserMapper userMapper = new UserMapper();
+    private UI ui = new UI();
+    private UserMapper userMapper = new UserMapper();
 
     public User checkLogin(){
         boolean isloggedin = false;

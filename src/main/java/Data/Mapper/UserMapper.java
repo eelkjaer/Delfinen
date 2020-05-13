@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserMapper {
-    Connection connection = DBConnector.getInstance().getConnection();
+    private Connection connection = DBConnector.getInstance().getConnection();
 
     public ArrayList<User> getUsers(){
         ArrayList<User> tmpUsers = new ArrayList<>();
