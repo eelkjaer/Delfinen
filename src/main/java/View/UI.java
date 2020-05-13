@@ -5,7 +5,7 @@ package View;
 import java.util.Scanner;
 
 public class UI implements UIInterface{
-    Scanner input = new Scanner(System.in);
+    final Scanner input = new Scanner(System.in);
 
     /**
      * @param str Streng som skal printes i konsol. Laver IKKE selv linebreak (\n)

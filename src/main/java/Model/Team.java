@@ -6,9 +6,9 @@ package Model;
 import java.util.ArrayList;
 
 public class Team {
-    private int id;
-    private String name;
-    private User coach;
+    private final int id;
+    private final String name;
+    private final User coach;
     private ArrayList<Member> teamMembers;
 
     public Team(int id, String name, User coach, ArrayList<Member> teamMembers) {

@@ -6,7 +6,7 @@
 package Controller;
 
 public class ModeratorController extends MainController {
-    BaseController base;
+    private final BaseController base;
     public ModeratorController(BaseController base){
         this.base = base;
     }
@@ -20,6 +20,7 @@ public class ModeratorController extends MainController {
                 //Se restance
                 showMissingPayments();
             case 2:
+                //Se kontigenter
                 showContingents();
             case 3:
                 //Tilføj betaling

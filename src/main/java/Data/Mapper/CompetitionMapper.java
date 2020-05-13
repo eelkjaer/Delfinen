@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CompetitionMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Competition> getCompetitions(){
         ArrayList<Competition> tmpCompetitions = new ArrayList<>();
 

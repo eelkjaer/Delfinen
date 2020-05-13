@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ResultMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
 
     public ArrayList<Result> getResults(ArrayList<Member> members, ArrayList<Competition> competitions){
         ArrayList<Result> tmpResults = new ArrayList<>();

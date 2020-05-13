@@ -18,14 +18,14 @@ abstract public class MainController {
 
 
     //Klasser til brug i controlleren
-    protected UI ui = new UI();
-    protected UserHandler userHandler = new UserHandler();
-    protected MemberHandler memberHandler = new MemberHandler();
-    protected MembershipHandler membershipHandler = new MembershipHandler();
-    protected PaymentHandler paymentHandler = new PaymentHandler();
-    protected CompetitionHandler competitionHandler = new CompetitionHandler();
-    protected ResultHandler resultHandler = new ResultHandler();
-    protected TeamHandler teamHandler = new TeamHandler();
+    protected final UI ui = new UI();
+    protected final UserHandler userHandler = new UserHandler();
+    protected final MemberHandler memberHandler = new MemberHandler();
+    protected final MembershipHandler membershipHandler = new MembershipHandler();
+    protected final PaymentHandler paymentHandler = new PaymentHandler();
+    protected final CompetitionHandler competitionHandler = new CompetitionHandler();
+    protected final ResultHandler resultHandler = new ResultHandler();
+    protected final TeamHandler teamHandler = new TeamHandler();
 
     //Fælles metoder
     /**

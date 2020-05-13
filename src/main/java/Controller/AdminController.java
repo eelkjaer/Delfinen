@@ -12,7 +12,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public class AdminController extends MainController {
-    BaseController base;
+    private final BaseController base;
     public AdminController(BaseController base){
         this.base = base;
     }

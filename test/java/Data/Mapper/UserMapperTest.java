@@ -47,7 +47,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void getUsersFail() throws Exception {
+    public void getUsersFail() {
         try {
             ArrayList<User> users = userMapper.getUsers();
             int actual = users.size();

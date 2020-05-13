@@ -6,8 +6,8 @@ package Model;
 
 public class Membership {
     private int id;
-    private String name;
-    private double price;
+    private final String name;
+    private final double price;
 
     public Membership(int id, String name, double price) {
         this.id = id;

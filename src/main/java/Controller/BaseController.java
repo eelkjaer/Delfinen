@@ -8,7 +8,7 @@ import Model.User;
 import View.UI;
 
 public class BaseController {
-    UI ui = new UI();
+    final UI ui = new UI();
     MainController ctrl;
     UserHandler userHandler;
     public void login(){

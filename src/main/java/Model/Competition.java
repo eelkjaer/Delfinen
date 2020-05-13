@@ -4,13 +4,12 @@
 package Model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Competition {
-    private int id;
+    private final int id;
     private String name;
-    private String location;
-    private LocalDate timestamp;
+    private final String location;
+    private final LocalDate timestamp;
 
     public Competition(int id, String name, String location, LocalDate timestamp) {
         this.id = id;

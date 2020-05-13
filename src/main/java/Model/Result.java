@@ -4,13 +4,13 @@
 package Model;
 
 public class Result {
-    private int id;
+    private final int id;
     private Member member;
-    private String diciplin;
-    private Competition competition;
-    private double resultMeters;
-    private double resultTime;
-    private boolean training;
+    private final String diciplin;
+    private final Competition competition;
+    private final double resultMeters;
+    private final double resultTime;
+    private final boolean training;
 
     public Result(int id, Member member, String diciplin, Competition competition, double resultMeters, double resultTime , boolean training) {
         this.id = id;
@@ -36,7 +36,7 @@ public class Result {
 
     @Override
     public String toString() {
-        String training = "";
+        String training;
         if(this.training){
             training = "Ja";
         } else {

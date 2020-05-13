@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class UserHandler {
     private ArrayList<User> users;
-    private UI ui = new UI();
-    private UserMapper userMapper = new UserMapper();
+    private final UI ui = new UI();
+    private final UserMapper userMapper = new UserMapper();
 
     public User checkLogin(){
         boolean isloggedin = false;

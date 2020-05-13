@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MembershipMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Membership> getMemberships(){
         ArrayList<Membership> tmpMemberships = new ArrayList<>();
 

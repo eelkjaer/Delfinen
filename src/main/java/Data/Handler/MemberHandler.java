@@ -49,12 +49,10 @@ public class MemberHandler {
         this.members = members;
     }
 
-    public boolean addMember(Member member){
+    public void addMember(Member member){
         if(!this.members.contains(member) || member != null){
             this.members.add(member);
-            return true;
         }
-        return false;
     }
 
     public ArrayList<Result> getResults() {
@@ -97,7 +95,7 @@ public class MemberHandler {
             }
         }
         if(selectedMembership == null){
-            assert selectedMembership != null;
+            assert false;
             selectedMembership.setId(3);
         }
 

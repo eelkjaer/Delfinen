@@ -26,11 +26,10 @@ public class MembershipHandler {
     }
 
     public String showMemberships() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for(Membership m: memberships){
-            str += "\n Kontigentets navn: " + m.getName() +
-                    "\n Kontigentets pris: " + m.getPrice() + " kr pr. År\n";
+            str.append("\n Kontigentets navn: ").append(m.getName()).append("\n Kontigentets pris: ").append(m.getPrice()).append(" kr pr. År\n");
         }
-        return str;
+        return str.toString();
     }
 }

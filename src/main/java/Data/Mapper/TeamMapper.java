@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class TeamMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Team> getTeams(ArrayList<Member> members, ArrayList<User> users){
         ArrayList<Team> tmpTeams = new ArrayList<>();
 

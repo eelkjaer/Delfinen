@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
 
     public ArrayList<User> getUsers(){
         ArrayList<User> tmpUsers = new ArrayList<>();
@@ -58,6 +58,6 @@ public class UserMapper {
             System.out.println("Error: " + e.getMessage());
         }
 
-        return tmpUser;
+        return null;
     }
 }

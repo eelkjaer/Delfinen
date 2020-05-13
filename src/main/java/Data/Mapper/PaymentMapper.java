@@ -9,11 +9,10 @@ import Util.DBConnector;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PaymentMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
     /**
      * @param members En liste over medlemmer
      * @return En liste med alle betalinger

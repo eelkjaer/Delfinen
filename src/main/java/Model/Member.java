@@ -8,9 +8,9 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class Member {
-    private int id;
-    private String name;
-    private LocalDate birthday;
+    private final int id;
+    private final String name;
+    private final LocalDate birthday;
     private String email;
     private int phone;
     private Membership membership;

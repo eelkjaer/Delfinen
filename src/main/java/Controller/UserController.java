@@ -5,7 +5,7 @@
 package Controller;
 
 public class UserController extends MainController {
-    BaseController base;
+    private final BaseController base;
     public UserController(BaseController base){
         this.base = base;
     }

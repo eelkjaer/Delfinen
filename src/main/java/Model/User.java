@@ -4,10 +4,10 @@
 package Model;
 
 public class User {
-    private int id;
-    private String username;
+    private final int id;
+    private final String username;
     private String password;
-    private String name;
+    private final String name;
     private int userPermissions;
 
 

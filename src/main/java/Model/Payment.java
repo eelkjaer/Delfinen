@@ -4,13 +4,12 @@
 package Model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Payment {
     private int id;
     private Member member;
-    private double paid;
-    private LocalDate timestamp;
+    private final double paid;
+    private final LocalDate timestamp;
 
     public Payment(int id, Member member, double paid, LocalDate timestamp) {
         this.id = id;

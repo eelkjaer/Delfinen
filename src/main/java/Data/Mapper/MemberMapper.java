@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MemberMapper {
-    private Connection connection = DBConnector.getInstance().getConnection();
+    private final Connection connection = DBConnector.getInstance().getConnection();
     /**
      * Henter alle medlemmer fra SQL
      * Opretter Member objekter
