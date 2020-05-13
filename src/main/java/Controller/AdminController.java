@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.Competition;
 import Model.Member;
 import Model.Membership;
+
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,7 +17,7 @@ public class AdminController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter; Tilføj konkurrence; Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
@@ -35,17 +37,20 @@ public class AdminController extends MainController {
                 showContingents();
             case 6:
                 //Tilføj resultat
-                addResult();
+                addNewCompetition();
             case 7:
+                //Tilføj resultat
+                addResult();
+            case 8:
                 // Se top 5 junior
                 showTop("junior");
-            case 8:
+            case 9:
                 // Se top 5 senior
                 showTop("senior");
-            case 9:
+            case 10:
                 base.logout();
                 break;
-            case 10: //ONLY FOR DEVELOPMENT
+            case 11: //ONLY FOR DEVELOPMENT
                 objectTesting();
                 showMenu();
             default:
@@ -53,6 +58,36 @@ public class AdminController extends MainController {
                 showMenu();
         }
     }
+
+    private void addNewCompetition() {
+
+        String pattern = "yyyy-MM-dd";
+
+        ui.printMessage("Opret ny konkurrance\n");
+
+        ui.printMessage("\nIndtast konkurrancens navn");
+        String name = ui.getStrInput();
+
+        ui.printMessage("\nIndtast location");
+        String location = ui.getStrInput();
+
+        ui.printMessage("\nIndtast dato for konkurrancen (som her: 2020-06-19)");
+        String datetime = ui.getStrInput();
+         String stringtest = "2020-06-19";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
+        LocalDate newdate = LocalDate.parse(datetime,df);
+
+        competitionHandler.addToCompetitions(competitionHandler.addNewCompetition(name,location,newdate));
+
+        ui.printMessage(String.format("%nNy konkurrance tilføjet!" +
+                "Competetion name: %s%n" +
+                "Competetion location: %s%n" +
+                "Competetion datetime: %s%n",  name, location, datetime));
+
+        showMenu();
+
+        }
+
 
     /**
      * Opretter nyt medlem

@@ -1,14 +1,15 @@
 package Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Competition {
     private int id;
     private String name;
     private String location;
-    private LocalDateTime timestamp;
+    private LocalDate timestamp;
 
-    public Competition(int id, String name, String location, LocalDateTime timestamp) {
+    public Competition(int id, String name, String location, LocalDate timestamp) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -27,7 +28,7 @@ public class Competition {
         return location;
     }
 
-    public LocalDateTime getTimestamp() {
+    public LocalDate getTimestamp() {
         return timestamp;
     }
 

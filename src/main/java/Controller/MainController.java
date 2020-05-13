@@ -91,6 +91,7 @@ abstract public class MainController {
     /**
      * Tilføjer nyt resultat
      **/
+
     public void addResult(){
         ui.printMessage("Tilføj nyt resultat\n");
 

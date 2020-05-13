@@ -60,7 +60,7 @@ public class MemberMapper {
                         "FROM Members\n" +
                         "INNER JOIN Results ON Results.MemberID = Members.ID\n" +
                         "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
-                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` = \"Junior\"\n" +
+                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` == \"Junior\"\n" +
                         "ORDER BY ResultTime, Results.Disciplin ASC LIMIT 20";
             case "senior":
                 query = "SELECT Members.ID AS \"MemberID\", Results.ID AS \"ResultID\"\n" +

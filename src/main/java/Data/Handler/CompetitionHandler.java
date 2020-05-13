@@ -3,6 +3,8 @@ package Data.Handler;
 import Data.Mapper.*;
 import Model.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CompetitionHandler {
@@ -13,16 +15,26 @@ public class CompetitionHandler {
         return competitions;
     }
 
-    public void updateCompetitions(){
+    public void addToCompetitions(Competition competition){
+        if(!competitions.contains(competition)){
+            competitions.add(competition);
+        }
+    }
+
+    public void updateCompetitions() {
         this.competitions = competitionMapper.getCompetitions();
     }
 
-    public Competition getCompetitionById(int id){
-        for(Competition c: competitions){
-            if(c.getId() == id){
+    public Competition getCompetitionById(int id) {
+        for (Competition c : competitions) {
+            if (c.getId() == id) {
                 return c;
             }
         }
         return null;
+    }
+
+    public Competition addNewCompetition(String name, String location, LocalDate datetime) {
+        return competitionMapper.addNewCompetition(name,location,datetime);
     }
 }

@@ -4,6 +4,7 @@ import Model.*;
 import Util.DBConnector;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class CompetitionMapper {
                 int id = resultset.getInt("ID");
                 String name = resultset.getString("Name");
                 String location = resultset.getString("Location");
-                LocalDateTime datetime = resultset.getTimestamp("DateTime").toLocalDateTime();
+                LocalDate datetime = resultset.getDate("DateTime").toLocalDate();
 
                 Competition tmpCompetition = new Competition(id,name,location,datetime);
 
@@ -42,7 +43,7 @@ public class CompetitionMapper {
      * @param datetime Hvornår starter konkurrencen
      * @return Konkurrence(Competition) objekt
      */
-    public Competition addNewCompetition(String name, String location, LocalDateTime datetime){
+    public Competition addNewCompetition(String name, String location, LocalDate datetime){
         Connection connection = DBConnector.getInstance().getConnection();
         try {
             String query = "INSERT INTO Competitons(Name, Location, DateTime) VALUES (?,?,?)";
@@ -50,7 +51,7 @@ public class CompetitionMapper {
 
             statement.setString(1,name);
             statement.setString(2,location);
-            statement.setTimestamp(3, Timestamp.valueOf(datetime));
+            statement.setDate(3, Date.valueOf(datetime));
             statement.executeUpdate();
             ResultSet tableKeys = statement.getGeneratedKeys();
             tableKeys.next();
