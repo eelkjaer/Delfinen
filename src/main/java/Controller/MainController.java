@@ -6,6 +6,9 @@ import Data.Handler.*;
 import Model.*;
 import View.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 abstract public class MainController {
     //Abstrakte ting til nedarvning
     /**
@@ -115,6 +118,35 @@ abstract public class MainController {
         ui.printMessage("\nNyt resultat tilføjet!\n\n");
 
         showMenu();
+    }
+
+    public void addNewCompetition() {
+
+        String pattern = "yyyy-MM-dd";
+
+        ui.printMessage("Opret nyt stævne\n");
+
+        ui.printMessage("\nIndtast stævnets navn");
+        String name = ui.getStrInput();
+
+        ui.printMessage("\nIndtast placering");
+        String location = ui.getStrInput();
+
+        ui.printMessage("\nIndtast dato for stævnet (som her: 2020-06-19)");
+        String datetime = ui.getStrInput();
+        String stringtest = "2020-06-19";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
+        LocalDate newdate = LocalDate.parse(datetime,df);
+
+        competitionHandler.addToCompetitions(competitionHandler.addNewCompetition(name,location,newdate));
+
+        ui.printMessage(String.format("%nNyt stævne tilføjet!" +
+                "Stævnets navn: %s%n" +
+                "Stævnets placering: %s%n" +
+                "Stævnets start: %s%n",  name, location, datetime));
+
+        showMenu();
+
     }
 
     public void refreshData(){

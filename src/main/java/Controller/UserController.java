@@ -12,19 +12,22 @@ public class UserController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Tilføj Resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilføj Resultat;Tilføj stævne;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
                 //Tilføj resultat
                 addResult();
             case 2:
+                // Tilføj nyt stævne
+                addNewCompetition();
+            case 3:
                 // Se top 5 junior
                 showTop("junior");
-            case 3:
+            case 4:
                 // Se top 5 senior
                 showTop("senior");
-            case 4:
+            case 5:
                 base.logout();
                 break;
             default:

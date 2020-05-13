@@ -41,7 +41,7 @@ public class AdminController extends MainController {
                 //Se kontigenter
                 showContingents();
             case 7:
-                //Tilføj resultat
+                //Tilføj nyt stævne
                 addNewCompetition();
             case 8:
                 //Tilføj resultat
@@ -60,36 +60,6 @@ public class AdminController extends MainController {
                 showMenu();
         }
     }
-
-    private void addNewCompetition() {
-
-        String pattern = "yyyy-MM-dd";
-
-        ui.printMessage("Opret nyt stævne\n");
-
-        ui.printMessage("\nIndtast stævnets navn");
-        String name = ui.getStrInput();
-
-        ui.printMessage("\nIndtast placering");
-        String location = ui.getStrInput();
-
-        ui.printMessage("\nIndtast dato for stævnet (som her: 2020-06-19)");
-        String datetime = ui.getStrInput();
-         String stringtest = "2020-06-19";
-        DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
-        LocalDate newdate = LocalDate.parse(datetime,df);
-
-        competitionHandler.addToCompetitions(competitionHandler.addNewCompetition(name,location,newdate));
-
-        ui.printMessage(String.format("%nNyt stævne tilføjet!" +
-                "Stævnets navn: %s%n" +
-                "Stævnets placering: %s%n" +
-                "Stævnets start: %s%n",  name, location, datetime));
-
-        showMenu();
-
-        }
-
 
     /**
      * Opretter nyt medlem

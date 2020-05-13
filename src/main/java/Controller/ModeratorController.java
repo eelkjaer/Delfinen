@@ -13,7 +13,7 @@ public class ModeratorController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Se restancer;Se kontigenter;Log ud");
+        ui.printMenu("Se restancer;Se kontigenter;Tilføj betaling;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
@@ -22,6 +22,9 @@ public class ModeratorController extends MainController {
             case 2:
                 showContingents();
             case 3:
+                //Tilføj betaling
+                addNewPayment();
+            case 4:
                 base.logout();
                 break;
             default:
