@@ -18,7 +18,7 @@ abstract public class MainController {
 
     //Klasser til brug i controlleren
     protected UI ui = new UI();
-    protected  UserHandler userHandler = new UserHandler();
+    protected UserHandler userHandler = new UserHandler();
     protected MemberHandler memberHandler = new MemberHandler();
     protected MembershipHandler membershipHandler = new MembershipHandler();
     protected PaymentHandler paymentHandler = new PaymentHandler();
@@ -27,40 +27,6 @@ abstract public class MainController {
     protected TeamHandler teamHandler = new TeamHandler();
 
     //Fælles metoder
-
-    public void objectTesting(){
-        /* FOR DEVELOPMENT PURPOSES */
-        for(Competition c: competitionHandler.getCompetitions()){
-            System.out.println(c);
-        }
-
-        for(Member m: memberHandler.getMembers()){
-            System.out.println(m);
-        }
-
-        for(Membership ms: membershipHandler.getMemberships()){
-            System.out.println(ms);
-        }
-
-        for(Payment p: paymentHandler.getPayments()){
-            System.out.println(p);
-        }
-
-        for(Result r: resultHandler.getResults()){
-            System.out.println(r);
-        }
-
-        for(Team t: teamHandler.getTeams()){
-            System.out.println(t);
-        }
-
-        for(User u: userHandler.getUsers()){
-            System.out.println(u);
-        }
-        /* END TEST */
-    }
-
-
     /**
      * @param filter Viser top 5 under følgende filtre: "junior" eller "senior"
      */

@@ -51,9 +51,6 @@ public class AdminController extends MainController {
             case 11:
                 base.logout();
                 break;
-            case 12: //ONLY FOR DEVELOPMENT
-                objectTesting();
-                showMenu();
             default:
                 ui.printMessage(select + " findes ikke!\n");
                 showMenu();

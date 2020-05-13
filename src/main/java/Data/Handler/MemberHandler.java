@@ -102,6 +102,10 @@ public class MemberHandler {
         return tmpMember.getId();
     }
 
+    /**
+     * @param filter "junior" or "senior"
+     * @return string with top swimmers
+     */
     public String showTopSwimmers(String filter){
         HashMap<Result,Member> tmpMap = getTopSwimmers(filter);
         StringBuilder printStr = new StringBuilder();
