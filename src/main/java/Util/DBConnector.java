@@ -1,6 +1,6 @@
-/*
-@author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
- */
+/**
+ * @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ **/
 package Util;
 import java.sql.Connection;
 import java.sql.DriverManager;

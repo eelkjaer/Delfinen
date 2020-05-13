@@ -1,3 +1,6 @@
+/**
+ * @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ **/
 package View;
 import java.util.Scanner;
 

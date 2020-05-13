@@ -1,3 +1,6 @@
+/**
+ @author Mohammed Hadra (cph-mh879@cphbusiness.dk)
+ **/
 package Model;
 
 public class User {

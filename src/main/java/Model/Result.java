@@ -1,3 +1,6 @@
+/**
+ @author Jacob Lange Nielsen (cph-jn352@cphbusiness.dk)
+ **/
 package Model;
 
 public class Result {

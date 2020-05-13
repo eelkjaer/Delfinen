@@ -1,5 +1,9 @@
+/**
+ @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ @author Mohammed Hadra (cph-mh879@cphbusiness.dk)
+ @author Jacob Lange Nielsen (cph-jn352@cphbusiness.dk)
+ **/
 package Controller;
-import Model.*;
 
 public class ModeratorController extends MainController {
     BaseController base;

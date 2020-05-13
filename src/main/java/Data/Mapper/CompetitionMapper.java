@@ -1,3 +1,7 @@
+/**
+ @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ @author Jacob Lange Nielsen (cph-jn352@cphbusiness.dk)
+ **/
 package Data.Mapper;
 
 import Model.*;

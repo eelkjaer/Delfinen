@@ -1,3 +1,7 @@
+/**
+ @author Mohammed Hadra (cph-mh879@cphbusiness.dk)
+ @author Andreas Bergmann (cph-ab435@cphbusiness.dk)
+ **/
 package Data.Handler;
 
 import Data.Mapper.*;

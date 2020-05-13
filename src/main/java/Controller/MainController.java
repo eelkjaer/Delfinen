@@ -1,12 +1,10 @@
+/**
+ @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ **/
 package Controller;
 import Data.Handler.*;
 import Model.*;
 import View.*;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-
 
 abstract public class MainController {
     //Abstrakte ting til nedarvning
