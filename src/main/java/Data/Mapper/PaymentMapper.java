@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PaymentMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
     /**
      * @param members En liste over medlemmer
      * @return En liste med alle betalinger
@@ -15,7 +16,6 @@ public class PaymentMapper {
     public ArrayList<Payment> getAllPayments(ArrayList<Member> members){
         ArrayList<Payment> tmpPayments = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -48,7 +48,6 @@ public class PaymentMapper {
 
     public String getMissingPayments(){
         StringBuilder str = new StringBuilder();
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -95,7 +94,6 @@ public class PaymentMapper {
     public Payment createNewPayment(Member member, double paid){
         int memberId = member.getId();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             String query = "INSERT INTO Payments(MemberID,Paid) VALUES (?,?)";
             PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);

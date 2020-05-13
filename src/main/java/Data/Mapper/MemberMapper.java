@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MemberMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
     /**
      * Henter alle medlemmer fra SQL
      * Opretter Member objekter
@@ -17,7 +18,6 @@ public class MemberMapper {
     public ArrayList<Member> getAllMembers(ArrayList<Membership> memberships){
         ArrayList<Member> tmpMembers = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -60,7 +60,7 @@ public class MemberMapper {
                         "FROM Members\n" +
                         "INNER JOIN Results ON Results.MemberID = Members.ID\n" +
                         "INNER JOIN Memberships ON Memberships.ID = Members.Membership\n" +
-                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` == \"Junior\"\n" +
+                        "WHERE Results.Training = 0 AND Memberships.Name != \"Passiv\" AND Memberships.`Name` = \"Junior\"\n" +
                         "ORDER BY ResultTime, Results.Disciplin ASC LIMIT 20";
             case "senior":
                 query = "SELECT Members.ID AS \"MemberID\", Results.ID AS \"ResultID\"\n" +
@@ -72,7 +72,6 @@ public class MemberMapper {
 
         }
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -104,7 +103,6 @@ public class MemberMapper {
      * @return workable Member object
      */
     public Member createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership) {
-        Connection connection = DBConnector.getInstance().getConnection();
 
         try {
             String query = "INSERT INTO Members(Name, Birthday, Email, PhoneNo, Membership) VALUES (?,?,?,?,?)";
@@ -136,7 +134,6 @@ public class MemberMapper {
      * @param member Medlemsobjekt med ændringer
      **/
     public Member editMember(Member member){
-        Connection connection = DBConnector.getInstance().getConnection();
 
         try {
             String query = "UPDATE Members SET Email=?, PhoneNo=?, Membership=? WHERE ID=? AND Name=? ";
@@ -162,7 +159,6 @@ public class MemberMapper {
      * @param id Medlemsnummer som skal slettes i databasen
      **/
     public boolean deleteMember(int id) {
-        Connection connection = DBConnector.getInstance().getConnection();
 
         try {
             String query = "DELETE FROM Members WHERE Members.ID = ?";

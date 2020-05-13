@@ -7,10 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ResultMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
+
     public ArrayList<Result> getResults(ArrayList<Member> members, ArrayList<Competition> competitions){
         ArrayList<Result> tmpResults = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -64,7 +65,6 @@ public class ResultMapper {
         int memberId = member.getId();
         int competitionId = competition.getId();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             String query = "INSERT INTO Results(MemberID, Disciplin, CompetitionID, ResultMeters, ResultTime, Training) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);

@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MembershipMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Membership> getMemberships(){
         ArrayList<Membership> tmpMemberships = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 

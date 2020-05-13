@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Competition;
-import Model.Member;
-import Model.Membership;
+import Model.*;
 
 
 import java.time.LocalDate;
@@ -17,7 +15,7 @@ public class AdminController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter; Tilføj konkurrence; Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Tilføj stævne;Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
@@ -63,15 +61,15 @@ public class AdminController extends MainController {
 
         String pattern = "yyyy-MM-dd";
 
-        ui.printMessage("Opret ny konkurrance\n");
+        ui.printMessage("Opret nyt stævne\n");
 
-        ui.printMessage("\nIndtast konkurrancens navn");
+        ui.printMessage("\nIndtast stævnets navn");
         String name = ui.getStrInput();
 
-        ui.printMessage("\nIndtast location");
+        ui.printMessage("\nIndtast placering");
         String location = ui.getStrInput();
 
-        ui.printMessage("\nIndtast dato for konkurrancen (som her: 2020-06-19)");
+        ui.printMessage("\nIndtast dato for stævnet (som her: 2020-06-19)");
         String datetime = ui.getStrInput();
          String stringtest = "2020-06-19";
         DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
@@ -79,10 +77,10 @@ public class AdminController extends MainController {
 
         competitionHandler.addToCompetitions(competitionHandler.addNewCompetition(name,location,newdate));
 
-        ui.printMessage(String.format("%nNy konkurrance tilføjet!" +
-                "Competetion name: %s%n" +
-                "Competetion location: %s%n" +
-                "Competetion datetime: %s%n",  name, location, datetime));
+        ui.printMessage(String.format("%nNyt stævne tilføjet!" +
+                "Stævnets navn: %s%n" +
+                "Stævnets placering: %s%n" +
+                "Stævnets start: %s%n",  name, location, datetime));
 
         showMenu();
 

@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class TeamMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Team> getTeams(ArrayList<Member> members, ArrayList<User> users){
         ArrayList<Team> tmpTeams = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 

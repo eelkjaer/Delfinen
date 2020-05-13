@@ -5,14 +5,13 @@ import Util.DBConnector;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CompetitionMapper {
+    private Connection connection = DBConnector.getInstance().getConnection();
     public ArrayList<Competition> getCompetitions(){
         ArrayList<Competition> tmpCompetitions = new ArrayList<>();
 
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
 
@@ -44,7 +43,6 @@ public class CompetitionMapper {
      * @return Konkurrence(Competition) objekt
      */
     public Competition addNewCompetition(String name, String location, LocalDate datetime){
-        Connection connection = DBConnector.getInstance().getConnection();
         try {
             String query = "INSERT INTO Competitons(Name, Location, DateTime) VALUES (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
