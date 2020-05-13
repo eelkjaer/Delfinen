@@ -1,14 +1,15 @@
 package Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Payment {
     private int id;
     private Member member;
     private double paid;
-    private LocalDateTime timestamp;
+    private LocalDate timestamp;
 
-    public Payment(int id, Member member, double paid, LocalDateTime timestamp) {
+    public Payment(int id, Member member, double paid, LocalDate timestamp) {
         this.id = id;
         this.member = member;
         this.paid = paid;

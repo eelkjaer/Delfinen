@@ -27,8 +27,18 @@ public class PaymentHandler {
         this.payments = paymentMapper.getAllPayments(this.members);
     }
 
+    public void addPayment(Payment payment){
+        if(!payments.contains(payment)){
+            payments.add(payment);
+        }
+    }
+
     public void setPayments(ArrayList<Payment> payments) {
         this.payments = payments;
+    }
+
+    public Payment addNewPayment(Member member, double paid){
+        return paymentMapper.createNewPayment(member,paid);
     }
 
     public String showMissingPayments(){

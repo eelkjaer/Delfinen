@@ -70,6 +70,27 @@ abstract public class MainController {
         showMenu();
     }
 
+    /**
+     *
+     */
+    public void addNewPayment(){
+        ui.printMessage("Tilføj ny betaling\n");
+
+        ui.printMessage("\nIndtast medlemmets id: ");
+        int id = ui.getIntInput();
+        Member paymentMember = memberHandler.getMemberById(id);
+
+        ui.printMessage("\nIndtast det indbetalte beløb (decimaltal): ");
+        double paid = ui.getDoubleInput();
+
+
+        Payment tmpPayment = paymentHandler.addNewPayment(paymentMember,paid);
+        paymentHandler.addPayment(tmpPayment);
+
+        ui.printMessage("\nNyt resultat tilføjet! Betalings-ID: " + tmpPayment.getId() + "\n\n");
+
+        showMenu();
+    }
 
     /**
      * Viser en lister over restancer

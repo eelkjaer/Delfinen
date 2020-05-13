@@ -4,6 +4,7 @@ import Model.*;
 import Util.DBConnector;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class PaymentMapper {
                 int paymentId = resultset.getInt("ID");
                 int memberID = resultset.getInt("MemberID");
                 double paid = resultset.getDouble("Paid");
-                LocalDateTime paymentDate = resultset.getTimestamp("Timestamp").toLocalDateTime();
+                LocalDate paymentDate = resultset.getDate("Timestamp").toLocalDate();
 
                 Member tmpMember = null;
                 for(Member m:members){
@@ -72,11 +73,12 @@ public class PaymentMapper {
                 String memberName = resultset.getString("Name");
                 int memberID = resultset.getInt("MemberID");
                 double restance = resultset.getDouble("Restance");
+                String restanceD = String.format("%.2f",restance);
 
                 if(restance>0){
-                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") har ").append(restance).append(" kr til gode\n");
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") har ").append(restanceD).append(" kr til gode\n");
                 } else {
-                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") skylder ").append(restance).append(" kr\n");
+                    str.append("\n").append(memberName).append(" (ID: ").append(memberID).append(") skylder ").append(restanceD).append(" kr\n");
                 }
 
             }
@@ -94,19 +96,21 @@ public class PaymentMapper {
     public Payment createNewPayment(Member member, double paid){
         int memberId = member.getId();
 
+        Date ltd = Date.valueOf(LocalDate.now());
+
         try {
-            String query = "INSERT INTO Payments(MemberID,Paid) VALUES (?,?)";
+            String query = "INSERT INTO Payments(MemberID,Paid,Timestamp) VALUES (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 
             statement.setInt(1,memberId);
             statement.setDouble(2,paid);
+            statement.setDate(3, ltd);
             statement.executeUpdate();
             ResultSet tableKeys = statement.getGeneratedKeys();
             tableKeys.next();
             int id = tableKeys.getInt(1);
-            LocalDateTime timestamp = tableKeys.getTimestamp("Timestamp").toLocalDateTime();
 
-            return new Payment(id,member,paid,timestamp);
+            return new Payment(id,member,paid,ltd.toLocalDate());
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

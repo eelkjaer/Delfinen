@@ -15,7 +15,7 @@ public class AdminController extends MainController {
     @Override
     public void showMenu() {
         refreshData();
-        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Se restancer;Se kontigenter;Tilføj stævne;Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
+        ui.printMenu("Tilmeld medlem;Rediger medlem;Slet medlem;Tilføj betaling;Se restancer;Se kontigenter;Tilføj stævne;Tilføj resultat;Se Top 5 - Junior;Se Top 5 - Senior;Log ud");
         int select = ui.getIntInput();
         switch (select){
             case 1:
@@ -28,27 +28,30 @@ public class AdminController extends MainController {
                 //slet
                 deleteMember();
             case 4:
+                //Tilføj betaling
+                addNewPayment();
+            case 5:
                 //Se restance
                 showMissingPayments();
-            case 5:
+            case 6:
                 //Se kontigenter
                 showContingents();
-            case 6:
-                //Tilføj resultat
-                addNewCompetition();
             case 7:
                 //Tilføj resultat
-                addResult();
+                addNewCompetition();
             case 8:
+                //Tilføj resultat
+                addResult();
+            case 9:
                 // Se top 5 junior
                 showTop("junior");
-            case 9:
+            case 10:
                 // Se top 5 senior
                 showTop("senior");
-            case 10:
+            case 11:
                 base.logout();
                 break;
-            case 11: //ONLY FOR DEVELOPMENT
+            case 12: //ONLY FOR DEVELOPMENT
                 objectTesting();
                 showMenu();
             default:
