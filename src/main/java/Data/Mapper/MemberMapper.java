@@ -52,7 +52,7 @@ public class MemberMapper {
 
     public int[] getTopFive(String filter){
         String query = "";
-        int[] result = new int[5];
+        int[] result = new int[20];
 
         switch(filter){
             case "junior":
