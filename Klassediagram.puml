@@ -60,132 +60,137 @@ package Controller{
 package Data{
     package Handler{
         class CompetitionHandler{
-            -competitionMapper: CompetitionMapper
-            -competitions: ArrayList<Competition>
-
-            +getCompetitions(): ArrayList<Competition>
-            +updateCompetitions(): void
-            +getCompetitionById(int id): Competition
+        #CompetitionMapper competitionMapper : final
+        #ArrayList<Competition> competition
+        --
+        +getCompetition : ArrayList<Competition>
+        +updateCompetitions() : void
+        +getCompetitionById(int id) : Competition
         }
 
         class MemberHandler{
-            -memberMapper: MemberMapper
-            -memberships: ArrayList<Membership>
-            -members: ArrayList<Member>
-            -results: ArrayList<Result>
-
-            +getMemberById(int id): Member
-            +getMembers(): ArrayList<Member>
-            +getResults(): ArrayList<Result>
-            +setMemberships(ArrayList<Membership> memberships): void
-            +setMembers(ArrayList<Member> members): void
-            +setResults(ArrayList<Result> results): void
-            +addMember(Member member): boolean
-            +updateMembers(ArrayList<Membership> memberships): void
-            +updateMember(Member member): void
-            +deleteMember(int id): boolean
-            +registerMember(String name, String birthday, String email, int phone, int membership): int
-            +showTopSwimmers(String filter): String
-            -getTopSwimmers(String filter): HashMap<Result,Member>
+        #MemberMapper memberMapper : final
+        #ArrayList<Membership> membership
+        #ArrayList<Member> members
+        #ArrayList<Result> results
+        --
+        +Member getMemberById(int id)
+        +updateMembers(ArrayList<Membership> memberships) : void
+        +setMemberships(ArrayList<Membership> memberships) : void
+        +getMembers() : ArrayList<Member>
+        +setMembers(ArrayList<Member> members) : void
+        +addMember(Member member) : boolean
+        +getResults() : ArrayList<Result>
+        +setResults(ArrayList<Result> results) : void
+        +updateMember(Member member) : void
+        +deleteMember(int id) : boolean
+        +registerMember(String name, String birthday, String email, int phone, int membership) : int
+        +showTopSwimmers(String filter) : String
+        +getTopSwimmers(String filter) : HashMap<Result,Member>
         }
 
         class MembershipHandler{
-            -memberMapper: MemberMapper
-            -memberships: ArrayList<Membership>
-
-            +getMemberships(): ArrayList<Membership>
-            +setMemberships(ArrayList<Membership> memberships): void
-            +updateMemberships(): void
-            +showMemberships(): String
+        #MembershipMapper memberMapper : final
+        #ArrayList<Membership> memberships
+        --
+        +getMemberships() : ArrayList<Membership>
+        +setMemberships(ArrayList<Membership> memberships) : void
+        +updateMemberships() : void
+        +showMemberships() : String
         }
 
         class PaymentHandler{
-            -paymentMapper: PaymentMapper
-            -members: ArrayList<Member>
-            -payments: ArrayList<Payment>
-
-            +getMembers(): ArrayList<Member>
-            +getPayments(): ArrayList<Payment>
-            +setMembers(ArrayList<Member> members): void
-            +setPayments(ArrayList<Payment> payments): void
-            +updatePayments(ArrayList<Member> members):void
-            +showMissingPayments(): String
+        #PaymentMapper paymentMapper : final
+        #ArrayList<Member> members
+        #ArrayList<Payment> payments
+        --
+        +getMembers() : ArrayList<Member>
+        +setMembers(ArrayList<Member> members) : void
+        +getPayments() : ArrayList<Payment>
+        +updatePayments(ArrayList<Member> members) : void
+        +setPayments(ArrayList<Payment> payments) : void
+        +showMissingPayments() : String
         }
 
         class ResultHandler{
-            -resultMapper = ResultMapper
-            -results: ArrayList<Result>
-
-            +getResults(): ArrayList<Result>
-            +setResults(ArrayList<Result> results): void
-            +addResult(Result result): Result
-            +updateResults(ArrayList<Member> members, ArrayList<Competition> competitions): void
-            +registerResult(Member member, int diciplin,Competition competition, double resultTime, String training): Result
+        #ResultMapper resultMapper : final
+        #ArrayList<Result> results
+        --
+        +ArrayList<Result> getResults()
+        +void setResults(ArrayList<Result> results)
+        +Result addResult(Result result)
+        +updateResults(ArrayList<Member> members, ArrayList<Competition> competitions) : void
+        +registerResult(Member member, int diciplin,Competition competition, double resultTime, String training) : Result
         }
-
         class TeamHandler{
-            -teamMapper: TeamMapper
-            -teams: ArrayList<Team>
-
-            +getTeams(): ArrayList<Team>
-            +setTeams(ArrayList<Team> teams): void
-            +updateResults(ArrayList<Member> members, ArrayList<User> users): void
+        #TeamMapper teamMapper : final
+        #ArrayList<Team> teams
+        --
+        +ArrayList<Team> getTeams()
+        +setTeams(ArrayList<Team> teams) : void
+        +updateResults(ArrayList<Member> members, ArrayList<User> users) : void
         }
 
         class UserHandler{
-            -users: ArrayList<User>
-            -ui: UI
-            -userMapper: UserMapper
-
-            +getUsers(): ArrayList<User>
-            +checkLogin(): User
-            +updateUsers(): void
+        #ArrayList<User> users;
+         UI ui = new UI();
+         UserMapper userMapper
+         --
+         +checkLogin() : User
+         +updateUsers() : void
+         +getUsers() : ArrayList<User>
         }
     }
 
     package Mapper{
         class CompetitionMapper{
-            +getCompetitions(): ArrayList<Competition>
-            +addNewCompetition(String name, String location, LocalDateTime datetime): Competition
+        +ArrayList<Competition> getCompetition()
+        +Competition addNewCompetition(String name, String location, LocalDateTime datetime)
         }
 
         class MemberMapper{
-            +getAllMembers(ArrayList<Membership> memberships): ArrayList<Member>
-            +getTopFive(String filter): int[]
-            +createNewMember(String name, LocalDate birthday, String email, int phone, Membership membership): Member
-            +editMember(Member member): Member
-            +deleteMember(int id): boolean
+        +ArrayList<Member> getAllMembers(ArrayList<Membership> membership)
+        +int[] getTopFive(String filter)
+        +Member createMember(String name, LocalDate birthday, String email, int phone, Membership membership)
+        +Member editMember(Member member)
+        +boolean deleteMember(int id)
+
         }
 
         class MembershipMapper{
-            +getMemberships(): ArrayList<Membership>
+        +ArrayList<Membership> getMembership() : tmpMemberships
+
         }
 
         class PaymentMapper{
-            +getAllPayments(ArrayList<Member> members): ArrayList<Payment>
-            +getMissingPayments(): String
-            +createNewPayment(Member member, double paid): Payment
+        +ArrayList<Payment> getAllPayments(ArrayList<Member> members) : tmpPayments
+        +String getMissingPayments() : str.toString()
+        +Payment createNewPayment(Member member, double paid) : null
         }
 
         class ResultMapper{
-            +getResults(ArrayList<Member> members, ArrayList<Competition> competitions): ArrayList<Result>
-            +addNewResult(Member member, String diciplin, Competition competition, Double resultMeters, double resultTime, boolean training): Result
+        +ArrayList<Result> getResults(ArrayList<Member> members, ArrayList<Competition> competition)
+        +Result addNewResult(Member member, String diciplin, Competition competition, Double ResultMeters, double resultTime, boolean training)
+
+
         }
 
         class TeamMapper{
-            +getTeams(ArrayList<Member> members, ArrayList<User> users): ArrayList<Team>
+        +ArrayList<Team> getTeams(ArrayList<Member> members, ArrayList<User> users)
+
         }
 
         class UserMapper{
-            -connection: Connection
-
-            +getUsers(): ArrayList<User>
-            +checkLogin(String username, String password): User
+        Connection connection
+        --
+        +ArrayList<User> getUsers()
+        +User checkLogin(String username, String password)
         }
     }
 }
 
 package Model {
+
     class Competition{
         -id: int
         -name: String
@@ -290,6 +295,7 @@ package Model {
 
 package Util{
     class DBConnector{
+
         -Connection connection;
         -{static}DBConnector instance;
         -String serverIP
@@ -326,5 +332,28 @@ package View{
     class UI implements UIInterface
 
 }
+note top of DBConnector : MySQL
+DBConnector .. UserHandler : use
+BaseController *-- UserHandler
+UI --> MainController
+User *--* MainController
+Member *--* MemberHandler
+Result --* Competition
+Result --* Member
+Payment --* Member
+Membership --* Member
+Member --* Team
+CompetitionMapper --> CompetitionHandler
+MemberMapper --> MemberHandler
+MembershipMapper --> MembershipHandler
+PaymentMapper --> PaymentHandler
+ResultMapper --> ResultHandler
+TeamMapper --> TeamHandler
+UserMapper --> UserHandler
+
+MemberMapper ..> DBConnector : Use
+
+
+
 
 @enduml
