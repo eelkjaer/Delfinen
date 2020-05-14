@@ -11,9 +11,6 @@ import java.time.format.DateTimeFormatter;
 
 abstract public class MainController {
     //Abstrakte ting til nedarvning
-    /**
-     * Viser menuen vha. UI til brugeren
-     **/
     public abstract void showMenu();
 
 
