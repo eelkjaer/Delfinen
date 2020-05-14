@@ -1,69 +1,109 @@
+/**
+ @author Emil Elkjær Nielsen (cph-en93@cphbusiness.dk)
+ @author Andreas Bergmann (cph-ab435@cphbusiness.dk)
+ @author Mohammed Hadra (cph-mh879@cphbusiness.dk)
+ **/
 package Data.Mapper;
 
+import Util.DBConnector;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.*;
 import Model.User;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
 
+import java.sql.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserMapperTest {
-    User actualUser;
-    User expectedUser;
-    UserMapper userMapper;
-    ArrayList<User> user;
+    private static final Connection connection = DBConnector.getInstance().getConnection();
+    static User actualUser;
+    static User expectedUser;
 
-    @Before
-    public void setUp() {
-        //int id,String username, String password, String name,int userPermissions
-        //1	admin
-        //2	mod
-        //3	user
-        //4	simon
-        expectedUser = new User(1,"admin","admin","emil",3);
+    static final UserMapper userMapper = new UserMapper();
 
-       userMapper = new UserMapper();
-       User user1 = new User(1,"admin","admin","emil",3);
-       User user2 = new User(2,"mod","mod","andreas",2);
-       User user3 = new User(3,"user","user","thor",1);
-       User user4 = new User(4,"simon","simon","simon",1);
+    private static void resetAutoIncrement(){
+        try {
+            String query = "ALTER TABLE `Users` AUTO_INCREMENT = 1";
+            Statement statement = connection.prepareStatement(query);
 
-       actualUser = user3;
+            statement.execute(query);
 
-       user = new ArrayList<>();
-       user.add(user1);
-       user.add(user2);
-       user.add(user3);
-       user.add(user4);
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void getUsers() throws Exception {
-        ArrayList<User> users = userMapper.getUsers();
-        int actual = users.size();
-        int expected = 4;
-        assertEquals(actual,expected);
-        throw new Exception("Mega fejl");
+    public static User createNewUser(User user) {
+        User tmpUser = user;
+
+        try {
+            String query = "INSERT INTO Users(Username, Password, Permissions, Name) VALUES (?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1,user.getUsername());
+            statement.setString(2,user.getPassword());
+            statement.setInt(3,user.getUserPermissions());
+            statement.setString(4,user.getName());
+            statement.executeUpdate();
+            ResultSet tableKeys = statement.getGeneratedKeys();
+            tableKeys.next();
+            tmpUser.setId(tableKeys.getInt(1));
+
+            return tmpUser;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @BeforeAll
+    public static void setUp() {
+        actualUser = null;
+        expectedUser = new User(100,"testuser","testpassword","Test Test",2);
     }
 
     @Test
-    public void getUsersFail() {
-        try {
-            ArrayList<User> users = userMapper.getUsers();
-            int actual = users.size();
-            int expected = 40;
+    @Order(1)
+    public void createUser(){
+        actualUser = createNewUser(expectedUser);
 
-            throw new Exception("fejl");
-        } catch (Exception e){
-            assertEquals("fejl",e.getMessage());
+        assertEquals(expectedUser.getName(),actualUser.getName());
+    }
+
+
+    @Test
+    @Order(2)
+    public void checkLogin() throws Exception {
+        actualUser = userMapper.checkLogin(expectedUser.getUsername(), expectedUser.getPassword());
+
+        if(actualUser==null){
+            throw new Exception("Forkert login!");
         }
 
+        assertEquals(expectedUser.getUsername(),actualUser.getUsername());
+        assertEquals(expectedUser.getPassword(),actualUser.getPassword());
+        assertEquals(expectedUser.getName(),actualUser.getName());
+        assertEquals(expectedUser.getUserPermissions(),actualUser.getUserPermissions());
     }
 
-    @Test
-    public void checkName(){
-    String actualUsersName = actualUser.getName();
-    String expectedUsersName = "thor";
-        assertEquals(expectedUsersName,actualUsersName);
+    @AfterAll
+    public static void tearDown() throws SQLException {
+        Connection connection = DBConnector.getInstance().getConnection();
+        try {
+            String query = "DELETE FROM Users WHERE Username=? && Name=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1,expectedUser.getUsername());
+            statement.setString(2,expectedUser.getName());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw new SQLException();
+        }
+        resetAutoIncrement();
     }
 }

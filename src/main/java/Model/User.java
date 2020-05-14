@@ -4,7 +4,7 @@
 package Model;
 
 public class User {
-    private final int id;
+    private int id;
     private final String username;
     private String password;
     private final String name;
@@ -33,8 +33,20 @@ public class User {
         return name;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
