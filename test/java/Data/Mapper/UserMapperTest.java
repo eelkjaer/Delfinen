@@ -9,8 +9,10 @@ import Util.DBConnector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.*;
 import Model.User;
+import org.junit.rules.ExpectedException;
 
 import java.sql.*;
 
@@ -81,7 +83,12 @@ public class UserMapperTest {
         if(actualUser==null){
             throw new Exception("Forkert login!");
         }
+    }
 
+    @Test
+    @Order(3)
+    public void compareUsers(){
+        assertEquals(expectedUser.getId(),actualUser.getId());
         assertEquals(expectedUser.getUsername(),actualUser.getUsername());
         assertEquals(expectedUser.getPassword(),actualUser.getPassword());
         assertEquals(expectedUser.getName(),actualUser.getName());
